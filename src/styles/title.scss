@@ -1,9 +1,9 @@
-@import "./_mixins";
+@import './_mixins';
 
 .title {
-    @include widthAndHeight(calc(min(50rem,100%)),100%);
-    min-height: 30rem;
-    @include flex;
-    flex-direction: column;
-    gap: 1rem;
-}   
+  @include widthAndHeight(calc(min(50rem, 100%)), 100%);
+  min-height: 30rem;
+  @include flex;
+  flex-direction: column;
+  gap: 1rem;
+}
