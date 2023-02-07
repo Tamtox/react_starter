@@ -26,23 +26,21 @@ function App() {
           MuiContainer: {
             styleOverrides: {
               root: {
-                paddingLeft: '5px',
-                paddingRight: '5px',
+                padding: '0 5px 0 5px',
               },
             },
           },
-          MuiTypography: {
-            styleOverrides: {
-              root: {
-                lineHeight: '1',
-              },
-            },
-          },
+          // MuiTypography: {
+          //   styleOverrides: {
+          //     root: {
+          //     },
+          //   },
+          // },
           MuiCard: {
             styleOverrides: {
               root: {
                 boxShadow: '0px 1px 3px black',
-                lineHeight: '1',
+                padding: '1rem',
               },
             },
           },
@@ -66,6 +64,33 @@ function App() {
         },
         palette: {
           mode: darkMode ? 'dark' : 'light',
+          background: {
+            default: darkMode ? '#191919' : '#f4f5f5',
+            paper: darkMode ? '#191919' : '#f4f5f5',
+          },
+          text: {
+            primary: darkMode ? '#ffffff' : '#000000',
+            secondary: darkMode ? '#ffffff' : '#000000',
+            disabled: darkMode ? '#ffffff' : '#000000',
+            // hint: darkMode ? '#ffffff' : '#000000',
+          },
+          primary: {
+            main: '#256D85',
+            light: '#FFC4C4',
+            dark: '#47B5FF',
+            contrastText: '#fff',
+          },
+          secondary: {
+            main: '#9c27b0',
+            light: '#ba68c8',
+            dark: '#7b1fa2',
+            contrastText: '#fff',
+          },
+          // error: {},
+          // warning: {},
+          // info: {},
+          // success: {},
+          // divider: 'yellow',
         },
       }),
     [darkMode],

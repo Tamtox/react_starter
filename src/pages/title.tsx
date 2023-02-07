@@ -1,6 +1,6 @@
 import '@/styles/title.scss';
 
-import { Box, Button, Container } from '@mui/material';
+import { Box, Button, Card, Container, Typography } from '@mui/material';
 import React, { useReducer } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -10,14 +10,10 @@ const Title: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
   return (
     <Container className="title">
-      <Button
-        variant="outlined"
-        onClick={() => {
-          dispatch(authActions.toggleDarkMode());
-        }}
-      >
-        Button
-      </Button>
+      <Card className={`title-card`}>
+        <Button variant="outlined">Button</Button>
+        <Typography>Sample text</Typography>
+      </Card>
     </Container>
   );
 };

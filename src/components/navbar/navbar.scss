@@ -3,4 +3,16 @@
 .navbar {
   position: fixed;
   top: 0;
+  .navbar-controls {
+    @include flex;
+    gap: 1rem;
+    .navbar-contols-dark-mode {
+    }
+    .navbar-contols-user {
+      .navbar-contols-user-icon {
+      }
+      .navbar-contols-user-menu {
+      }
+    }
+  }
 }

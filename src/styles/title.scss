@@ -6,4 +6,9 @@
   @include flex;
   flex-direction: column;
   gap: 1rem;
+  .title-card {
+    @include flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }

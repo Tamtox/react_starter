@@ -1,61 +1,81 @@
 import './navbar.scss';
 
-import { alpha, AppBar, Badge, Box, IconButton, InputBase, Menu, MenuItem } from '@mui/material';
+import { alpha, AppBar, Badge, Box, Button, IconButton, InputBase, Menu, MenuItem, useMediaQuery } from '@mui/material';
 import { styled, Toolbar, Typography } from '@mui/material';
 import React, { useReducer } from 'react';
-import { MdMailOutline, MdMenu, MdNotificationsNone, MdOutlineAccountCircle, MdSearch } from 'react-icons/md';
+import { FaRegMoon, FaRegSun } from 'react-icons/fa';
+import { MdMenu, MdNotificationsNone, MdOutlineAccountCircle, MdSearch } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '@/store/store';
+import { authActions } from '@/store/store';
 
 const Navbar = (): JSX.Element => {
   const auth = useSelector<RootState, string | undefined>((state) => state.authSlice.authToken);
+  const darkMode = useSelector<RootState, boolean>((state) => state.authSlice.darkMode);
+  const dispatch = useDispatch();
+  const mobile = useMediaQuery('(max-width:700px)');
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(123);
-  };
-
-  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
+  const userMenuHandler = (event: React.MouseEvent<HTMLElement>) => {
+    auth ? setAnchorEl(event.currentTarget) : null;
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const toggleDarkModeHandler = () => {
+    dispatch(authActions.toggleDarkMode());
+  };
   return (
-    <AppBar className="navbar" position="static">
+    <AppBar className={`navbar`} position="static">
       <Toolbar>
         <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
           <MdMenu />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography className={`navbar-title`} variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Starter App
         </Typography>
-        {auth && (
-          <div>
+        <Box className={`navbar-controls`}>
+          <IconButton
+            className={`navbar-contols-dark-mode`}
+            size="large"
+            aria-label="dark mode toggle"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={toggleDarkModeHandler}
+            color="inherit"
+          >
+            {darkMode ? (
+              <FaRegSun className={`navbar-contols-dark-mode-sun`} />
+            ) : (
+              <FaRegMoon className={`navbar-contols-dark-mode-moon`} />
+            )}
+          </IconButton>
+          <div className={`navbar-contols-user`}>
             <IconButton
+              className={`navbar-contols-user-icon`}
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
+              aria-haspopup="false"
+              onClick={userMenuHandler}
               color="inherit"
             >
               <MdOutlineAccountCircle />
             </IconButton>
             <Menu
+              className={`navbar-contols-user-menu`}
               id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: 'bottom',
+                horizontal: 'center',
               }}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'center',
               }}
               open={Boolean(anchorEl)}
               onClose={handleClose}
@@ -64,7 +84,7 @@ const Navbar = (): JSX.Element => {
               <MenuItem onClick={handleClose}>My account</MenuItem>
             </Menu>
           </div>
-        )}
+        </Box>
       </Toolbar>
     </AppBar>
   );
