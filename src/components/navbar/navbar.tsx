@@ -4,7 +4,8 @@ import { alpha, AppBar, Badge, Box, Button, IconButton, InputBase, Menu, MenuIte
 import { styled, Toolbar, Typography } from '@mui/material';
 import React, { useReducer } from 'react';
 import { FaRegMoon, FaRegSun } from 'react-icons/fa';
-import { MdMenu, MdNotificationsNone, MdOutlineAccountCircle, MdSearch } from 'react-icons/md';
+import { HiOutlineMenu } from 'react-icons/hi';
+import { MdNotificationsNone, MdOutlineAccountCircle, MdSearch } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '@/store/store';
@@ -29,9 +30,9 @@ const Navbar = (): JSX.Element => {
   };
   return (
     <AppBar className={`navbar`} position="static">
-      <Toolbar>
+      <Toolbar className={`navbar-container`}>
         <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-          <MdMenu />
+          <HiOutlineMenu />
         </IconButton>
         <Typography className={`navbar-title`} variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Starter App

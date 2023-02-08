@@ -1,17 +1,20 @@
 @import '../../styles/_mixins';
-
 .navbar {
   position: fixed;
   top: 0;
-  .navbar-controls {
-    @include flex;
-    gap: 1rem;
-    .navbar-contols-dark-mode {
-    }
-    .navbar-contols-user {
-      .navbar-contols-user-icon {
+  @include flex;
+  .navbar-container {
+    width: calc(min(110rem, 100%));
+    .navbar-controls {
+      @include flex;
+      gap: 1rem;
+      .navbar-contols-dark-mode {
       }
-      .navbar-contols-user-menu {
+      .navbar-contols-user {
+        .navbar-contols-user-icon {
+        }
+        .navbar-contols-user-menu {
+        }
       }
     }
   }

@@ -39,7 +39,7 @@ function App() {
           MuiCard: {
             styleOverrides: {
               root: {
-                boxShadow: '0px 1px 3px black',
+                boxShadow: `0px 1px 3px ${'#000000'}`,
                 padding: '1rem',
               },
             },
@@ -65,19 +65,19 @@ function App() {
         palette: {
           mode: darkMode ? 'dark' : 'light',
           background: {
-            default: darkMode ? '#191919' : '#f4f5f5',
-            paper: darkMode ? '#191919' : '#f4f5f5',
+            default: darkMode ? '#000000' : '#FAF9F6',
+            paper: darkMode ? '#0f0f0f' : '#ffffff',
           },
-          text: {
-            primary: darkMode ? '#ffffff' : '#000000',
-            secondary: darkMode ? '#ffffff' : '#000000',
-            disabled: darkMode ? '#ffffff' : '#000000',
-            // hint: darkMode ? '#ffffff' : '#000000',
-          },
+          // text: {
+          //   primary: darkMode ? '#ffffff' : '#000000',
+          //   secondary: darkMode ? '#ffffff' : '#000000',
+          //   disabled: darkMode ? '#ffffff' : '#000000',
+          //   // hint: darkMode ? '#ffffff' : '#000000',
+          // },
           primary: {
-            main: '#256D85',
-            light: '#FFC4C4',
-            dark: '#47B5FF',
+            main: '#645CAA',
+            light: '#EBC7E8',
+            dark: '#1C3879',
             contrastText: '#fff',
           },
           secondary: {
