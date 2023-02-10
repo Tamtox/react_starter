@@ -135,7 +135,7 @@ const Home: React.FC = (): JSX.Element => {
         </Box>
       </Box>
       {repoLoading ? (
-        <Loading height="100vh" />
+        <Loading height="50vh" />
       ) : (
         <Box className={`list`}>
           {repoList.map((repo, index) => (

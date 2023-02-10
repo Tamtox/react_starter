@@ -3,7 +3,9 @@ import { useDispatch } from 'react-redux';
 
 import { repoActions } from '@/store/store';
 
-const host = `http://localhost:8080`;
+const localhost = `http://localhost:8080`;
+
+const address = `https://github-check-123.fly.dev`;
 
 const useRepoHooks = () => {
   const dispatch = useDispatch();
@@ -12,7 +14,7 @@ const useRepoHooks = () => {
     try {
       const repoResponse: { data: { repoList: [] } } = await axios.request({
         method: 'POST',
-        url: `${host}/repos/getAllRepos`,
+        url: `${address}/repos/getAllRepos`,
         data: { page },
       });
       const { repoList } = repoResponse.data;
@@ -28,7 +30,7 @@ const useRepoHooks = () => {
     try {
       const repoResponse: { data: { repoList: [] } } = await axios.request({
         method: 'POST',
-        url: `${host}/repos/getSingleRepo`,
+        url: `${address}/repos/getSingleRepo`,
         data: { query, queryType, page },
       });
       const { repoList } = repoResponse.data;
@@ -44,7 +46,7 @@ const useRepoHooks = () => {
     try {
       const repoResponse = await axios.request({
         method: 'POST',
-        url: `${host}/repos/syncRepos`,
+        url: `${address}/repos/syncRepos`,
       });
       const { repoList } = repoResponse.data;
       dispatch(repoActions.setRepoList(repoList));
