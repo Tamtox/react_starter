@@ -1,0 +1,48 @@
+@import './_mixins';
+
+.home {
+  @include widthAndHeight(100%, 100%);
+  min-height: 100vh;
+  gap: 1rem;
+  .toolbar {
+    @include grid(50% 50%, 100%);
+    @include widthAndHeight(calc(min(80rem, 100%)), 100%);
+    padding: 1rem 0 1rem 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 49;
+    gap: 1rem;
+    margin: auto;
+    .toolbar-search-form {
+      @include widthAndHeight(100%, 100%);
+      @include grid(100%, 1fr 2fr 1fr);
+      justify-self: center;
+      justify-items: center;
+      gap: 1rem;
+    }
+    .toolbar-buttons {
+      @include flex;
+      gap: 1rem;
+      .pagination {
+        @include flex;
+        gap: 1rem;
+      }
+    }
+  }
+  .list {
+    @include widthAndHeight(calc(minmax(100%, 100%)), calc(min(100%, 100%)));
+    display: grid;
+    grid-template-columns: repeat(auto-fit, min(35rem, 100%));
+    grid-auto-rows: 12rem;
+    justify-content: center;
+    padding: 1rem 0 7vh 0;
+    gap: 1rem;
+    margin: auto;
+    .list-item {
+      @include flex(flex-start, flex-start);
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+  }
+}

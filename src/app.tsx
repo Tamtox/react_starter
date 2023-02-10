@@ -12,8 +12,8 @@ import { Route, Routes } from 'react-router-dom';
 
 import { RootState } from '@/store/store';
 
-const Title = React.lazy(() => import('./pages/title'));
-const Loading = React.lazy(() => import('./pages/loading'));
+const Home = React.lazy(() => import('./pages/home'));
+const Loading = React.lazy(() => import('./components/loading/Loading'));
 import Navbar from '@/components/navbar/navbar';
 
 function App() {
@@ -101,13 +101,13 @@ function App() {
       <ThemeProvider theme={myTheme}>
         <CssBaseline />
         <Navbar />
-        <Container component="main" className="app">
+        <Container maxWidth={false} component="main" className="app">
           <div className="wrapper">
             <Suspense fallback={<Loading height="100vh" />}>
               <Routes>
-                <Route path="/" element={<Title />} />
+                {/* <Route path="/" element={<Home />} /> */}
                 {/* <Route path='/auth' element={isLoggedIn ? (verificationStatus === "Complete" ? <Home/> : <Profile/>) : <Auth/>} /> */}
-                <Route path="*" element={<Title />} />
+                <Route path="*" element={<Home />} />
               </Routes>
             </Suspense>
           </div>

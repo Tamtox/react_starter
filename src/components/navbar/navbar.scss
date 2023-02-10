@@ -5,16 +5,40 @@
   @include flex;
   .navbar-container {
     width: calc(min(110rem, 100%));
-    .navbar-controls {
-      @include flex;
+    @include grid(100%, 80% 20%);
+    .nav-element {
+      width: fit-content;
+      min-height: 3rem;
+      @include flex(flex-start, center);
+      white-space: nowrap;
+      position: relative;
+      padding: 0 0.5rem 0 0.5rem;
       gap: 1rem;
-      .navbar-contols-dark-mode {
+      transition: 0.3s;
+      border-radius: 20px;
+      cursor: pointer;
+      background: red;
+      .nav-text {
+        transform: translateY(2px);
       }
-      .navbar-contols-user {
-        .navbar-contols-user-icon {
-        }
-        .navbar-contols-user-menu {
-        }
+    }
+    .nav-element-dark {
+      @extend .nav-element;
+    }
+    .navbar-main {
+      @include flex(flex-start, center);
+      gap: 1rem;
+      .navbar-main-title {
+      }
+      .navbar-main-menu {
+      }
+    }
+    .navbar-util {
+      @include flex(flex-end, center);
+      gap: 1rem;
+      .navbar-dark-mode {
+      }
+      .navbar-user {
       }
     }
   }

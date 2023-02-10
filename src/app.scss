@@ -5,10 +5,14 @@
   min-height: 100vh;
   .wrapper {
     width: calc(min(110rem, 100%));
-    min-height: 100vh;
     @include flex;
     padding: 4rem 1rem 0 1rem;
   }
+}
+
+.icon {
+  font-size: 1.75rem;
+  color: inherit;
 }
 
 /* Enable hover only on non-touch devices */
