@@ -14,7 +14,7 @@ const useRepoHooks = () => {
     try {
       const repoResponse: { data: { repoList: [] } } = await axios.request({
         method: 'POST',
-        url: `${address}/repos/getAllRepos`,
+        url: `${localhost}/repos/getAllRepos`,
         data: { page },
       });
       const { repoList } = repoResponse.data;
@@ -30,7 +30,7 @@ const useRepoHooks = () => {
     try {
       const repoResponse: { data: { repoList: [] } } = await axios.request({
         method: 'POST',
-        url: `${address}/repos/getSingleRepo`,
+        url: `${localhost}/repos/getSingleRepo`,
         data: { query, queryType, page },
       });
       const { repoList } = repoResponse.data;
@@ -46,7 +46,7 @@ const useRepoHooks = () => {
     try {
       const repoResponse = await axios.request({
         method: 'POST',
-        url: `${address}/repos/syncRepos`,
+        url: `${localhost}/repos/syncRepos`,
       });
       const { repoList } = repoResponse.data;
       dispatch(repoActions.setRepoList(repoList));
