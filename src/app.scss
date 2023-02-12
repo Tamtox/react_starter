@@ -1,19 +1,24 @@
 @import './styles/mixins';
 
 .app {
-  @include flex(center, center);
   min-height: 100vh;
   .wrapper {
     width: calc(min(110rem, 100%));
-    @include flex;
-    padding: 4rem 1rem 0 1rem;
+    min-height: 100vh;
+    margin: auto;
+    padding: 10vh 1rem 0 1rem;
   }
 }
 
-.icon {
-  font-size: 1.75rem;
-  color: inherit;
+// Global classes
+.icon-container {
+  .icon {
+    font-size: 1.75rem;
+    color: inherit;
+  }
 }
+
+// Transitions and animation
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
@@ -21,6 +26,11 @@
 
 /* Mobile */
 @media (max-width: 700px) {
+  .app {
+    .wrapper {
+      padding: 12vh 1rem 0 1rem;
+    }
+  }
 }
 
 /* Tablet and Smaller Desktop */

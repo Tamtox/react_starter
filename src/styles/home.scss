@@ -1,9 +1,6 @@
 @import './_mixins';
 
 .home {
-  @include widthAndHeight(100%, 100%);
-  min-height: 100vh;
-  gap: 1rem;
   .toolbar {
     @include grid(50% 50%, 100%);
     @include widthAndHeight(calc(min(80rem, 100%)), 100%);

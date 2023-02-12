@@ -62,20 +62,20 @@ const Navbar = (): JSX.Element => {
     <>
       <AppBar className={`navbar`} position="fixed">
         <Toolbar className={`navbar-container`}>
-          <Box className={`navbar-main`}>
-            {/* <Box className={`navbar-main-title nav-element${darkMode ? '-dark' : ''}`}>
-              <FaHome className={`navbar-title-icon icon`} />
-              <Typography className={`navbar-title`} variant="h6">
+          <div className={`navbar-main`}>
+            <Box className={`navbar-main-title-container`}>
+              <IconButton className={`navbar-title-icon-container icon-container`} size="large" color="inherit">
+                <FaHome className={`navbar-title-icon icon`} />
+              </IconButton>
+              <Typography className={`navbar-title`} variant="h5">
                 Starter App
               </Typography>
             </Box>
-            <Box className={`navbar-main-menu`}>
-              <Button variant="outlined">Button</Button>
-            </Box> */}
-          </Box>
-          <Box className={`navbar-util`}>
+            <Box className={`navbar-main-menu`}></Box>
+          </div>
+          <div className={`navbar-util`}>
             <IconButton
-              className={`navbar-dark-mode`}
+              className={`navbar-dark-mode icon-container`}
               size="large"
               aria-label="dark mode toggle"
               aria-controls="menu-appbar"
@@ -84,14 +84,14 @@ const Navbar = (): JSX.Element => {
               color="inherit"
             >
               {darkMode ? (
-                <FaRegSun className={`navbar-dark-mode-sun`} />
+                <FaRegSun className={`navbar-dark-mode-sun icon`} />
               ) : (
-                <FaRegMoon className={`navbar-dark-mode-moon`} />
+                <FaRegMoon className={`navbar-dark-mode-moon icon`} />
               )}
             </IconButton>
-            {/* <div className={`navbar-user`}>
+            <div className={`navbar-user`}>
               <IconButton
-                className={`navbar-user-icon`}
+                className={`navbar-user-icon icon-container`}
                 size="large"
                 aria-label="account of current user"
                 aria-controls="navbar-user-menu"
@@ -101,7 +101,7 @@ const Navbar = (): JSX.Element => {
                 }}
                 color="inherit"
               >
-                <MdOutlineAccountCircle />
+                <MdOutlineAccountCircle className={`icon`} />
               </IconButton>
               <Menu
                 className={`navbar-user-menu`}
@@ -123,8 +123,8 @@ const Navbar = (): JSX.Element => {
                 <MenuItem onClick={closeMenusHandler}>Profile</MenuItem>
                 <MenuItem onClick={closeMenusHandler}>My account</MenuItem>
               </Menu>
-            </div> */}
-          </Box>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
     </>

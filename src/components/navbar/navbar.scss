@@ -6,6 +6,7 @@
   .navbar-container {
     width: calc(min(110rem, 100%));
     @include grid(100%, 80% 20%);
+    margin: auto;
     .nav-element {
       width: fit-content;
       min-height: 3rem;
@@ -28,7 +29,9 @@
     .navbar-main {
       @include flex(flex-start, center);
       gap: 1rem;
-      .navbar-main-title {
+      .navbar-main-title-container {
+        @include flex(flex-start, center);
+        gap: 1rem;
       }
       .navbar-main-menu {
       }
