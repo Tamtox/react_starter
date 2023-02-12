@@ -31,7 +31,7 @@
     @include widthAndHeight(calc(minmax(100%, 100%)), calc(min(100%, 100%)));
     display: grid;
     grid-template-columns: repeat(auto-fit, min(35rem, 100%));
-    grid-auto-rows: 12rem;
+    grid-auto-rows: 5rem;
     justify-content: center;
     padding: 1rem 0 7vh 0;
     gap: 1rem;

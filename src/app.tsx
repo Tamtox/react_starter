@@ -7,18 +7,16 @@ import '@fontsource/roboto/700.css';
 // eslint-disable-next-line prettier/prettier
 import { Box, Container, createTheme, CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material';
 import React, { Suspense, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 
-import { RootState } from '@/store/store';
+import { IAuthStore, useAuthStore } from '@/store/auth_store';
 
 const Home = React.lazy(() => import('./pages/home'));
 const Loading = React.lazy(() => import('./components/loading/Loading'));
 import Navbar from '@/components/navbar/navbar';
 
 function App() {
-  const darkMode = useSelector<RootState, boolean>((state) => state.authSlice.darkMode);
-  const auth = useSelector<RootState, string | undefined>((state) => state.authSlice.authToken);
+  const { authToken, darkMode, toggleDarkMode } = useAuthStore((state: IAuthStore) => state);
   const myTheme = useMemo(
     () =>
       createTheme({

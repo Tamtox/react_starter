@@ -22,10 +22,8 @@ import React, { useReducer } from 'react';
 import { FaHome, FaRegMoon, FaRegSun } from 'react-icons/fa';
 import { HiOutlineMenu } from 'react-icons/hi';
 import { MdNotificationsNone, MdOutlineAccountCircle, MdSearch } from 'react-icons/md';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '@/store/store';
-import { authActions } from '@/store/store';
+import { IAuthStore, useAuthStore } from '@/store/auth_store';
 
 interface INavbarState {
   navbarMenu: null | HTMLElement;
@@ -33,9 +31,7 @@ interface INavbarState {
 }
 
 const Navbar = (): JSX.Element => {
-  const auth = useSelector<RootState, string | undefined>((state) => state.authSlice.authToken);
-  const darkMode = useSelector<RootState, boolean>((state) => state.authSlice.darkMode);
-  const dispatch = useDispatch();
+  const { darkMode, toggleDarkMode } = useAuthStore((state: IAuthStore) => state);
   const mobile = useMediaQuery('(max-width:700px)');
   const [state, setState] = useReducer(
     (state: INavbarState, action: Partial<INavbarState>) => ({ ...state, ...action }),
@@ -55,14 +51,11 @@ const Navbar = (): JSX.Element => {
   const closeMenusHandler = () => {
     setState({ navbarMenu: null, navbarUserMenu: null });
   };
-  const toggleDarkModeHandler = () => {
-    dispatch(authActions.toggleDarkMode());
-  };
   return (
     <>
       <AppBar className={`navbar`} position="fixed">
         <Toolbar className={`navbar-container`}>
-          <div className={`navbar-main`}>
+          <Box className={`navbar-main`}>
             <Box className={`navbar-main-title-container`}>
               <IconButton className={`navbar-title-icon-container icon-container`} size="large" color="inherit">
                 <FaHome className={`navbar-title-icon icon`} />
@@ -71,16 +64,17 @@ const Navbar = (): JSX.Element => {
                 Starter App
               </Typography>
             </Box>
-            <Box className={`navbar-main-menu`}></Box>
-          </div>
-          <div className={`navbar-util`}>
+            <Box className={`navbar-main-menu`}>Menu</Box>
+            <Box className={`navbar-main-links`}>Links</Box>
+          </Box>
+          <Box className={`navbar-util`}>
             <IconButton
               className={`navbar-dark-mode icon-container`}
               size="large"
               aria-label="dark mode toggle"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={toggleDarkModeHandler}
+              onClick={toggleDarkMode}
               color="inherit"
             >
               {darkMode ? (
@@ -89,7 +83,7 @@ const Navbar = (): JSX.Element => {
                 <FaRegMoon className={`navbar-dark-mode-moon icon`} />
               )}
             </IconButton>
-            <div className={`navbar-user`}>
+            <Box className={`navbar-user`}>
               <IconButton
                 className={`navbar-user-icon icon-container`}
                 size="large"
@@ -123,8 +117,8 @@ const Navbar = (): JSX.Element => {
                 <MenuItem onClick={closeMenusHandler}>Profile</MenuItem>
                 <MenuItem onClick={closeMenusHandler}>My account</MenuItem>
               </Menu>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </Toolbar>
       </AppBar>
     </>
