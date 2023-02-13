@@ -13,12 +13,13 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import React, { useEffect, useReducer } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 import Loading from '@/components/loading/Loading';
 import { IAuthStore, useAuthStore } from '@/store/auth_store';
+import { IPostsStore, usePostsStore } from '@/store/posts_store';
 
 interface IHomeState {
   search: string;
@@ -26,42 +27,52 @@ interface IHomeState {
   query: string;
 }
 
-const myPosts = [
-  { id: '1', title: 'Post 1' },
-  { id: '2', title: 'Post 2' },
-  { id: '3', title: 'Post 3' },
-  { id: '4', title: 'Post 4' },
-  { id: '5', title: 'Post 5' },
-  { id: '6', title: 'Post 6' },
-  { id: '7', title: 'Post 7' },
-  { id: '8', title: 'Post 8' },
-];
-
 function wait(durationSeconds: number) {
   return new Promise((resolve) => setTimeout(resolve, durationSeconds * 1000));
 }
 
 const Home: React.FC = (): JSX.Element => {
   const { darkMode, toggleDarkMode } = useAuthStore((state: IAuthStore) => state);
+  const { posts, addPost, deletePost } = usePostsStore((state: IPostsStore) => state);
   const [state, setState] = useReducer((state: IHomeState, action: Partial<IHomeState>) => ({ ...state, ...action }), {
     search: '',
     query: 'name',
     page: '1',
   });
-  const postQuery = useQuery({
+  // Query
+  const queryClient = new QueryClient();
+  const query = useQuery({
     queryKey: ['posts'],
-    queryFn: () => wait(1).then(() => [...myPosts]),
+    queryFn: (queryKey) =>
+      wait(1).then(() => {
+        console.log(queryKey);
+        return [...posts];
+      }),
   });
-  const posMutation = useMutation({});
-  if (postQuery.isLoading) return <Loading height="100vh" />;
-  if (postQuery.isError) return <pre>{JSON.stringify(postQuery.error)}</pre>;
+  const mutation = useMutation({
+    mutationFn: (title: string) => {
+      return wait(1).then(() => posts.push({ id: crypto.randomUUID(), title }));
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['posts']);
+    },
+  });
+  if (query.isLoading) return <Loading height="100vh" />;
+  if (query.isError) return <pre>{JSON.stringify(query.error)}</pre>;
   return (
     <Container maxWidth={false} className="home">
       <Box className={`toolbar`}>
-        <Button variant="outlined">Reset</Button>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            mutation.mutate('new post');
+          }}
+        >
+          Add
+        </Button>
       </Box>
       <Box className={`list`}>
-        {postQuery.data.map((post) => (
+        {query.data.map((post) => (
           <Card key={post.id}>{post.title}</Card>
         ))}
       </Box>

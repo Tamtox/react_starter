@@ -18,6 +18,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
+import { stat } from 'fs';
 import React, { useReducer } from 'react';
 import { FaHome, FaRegMoon, FaRegSun } from 'react-icons/fa';
 import { HiOutlineMenu } from 'react-icons/hi';
@@ -25,26 +26,34 @@ import { MdNotificationsNone, MdOutlineAccountCircle, MdSearch } from 'react-ico
 
 import { IAuthStore, useAuthStore } from '@/store/auth_store';
 
+import Auth from '../auth/auth';
+
 interface INavbarState {
   navbarMenu: null | HTMLElement;
   navbarUserMenu: null | HTMLElement;
+  authMenuOpen: boolean;
 }
 
 const Navbar = (): JSX.Element => {
-  const { darkMode, toggleDarkMode } = useAuthStore((state: IAuthStore) => state);
+  const { authToken, darkMode, toggleDarkMode } = useAuthStore((state: IAuthStore) => state);
   const mobile = useMediaQuery('(max-width:700px)');
   const [state, setState] = useReducer(
     (state: INavbarState, action: Partial<INavbarState>) => ({ ...state, ...action }),
     {
       navbarMenu: null,
       navbarUserMenu: null,
+      authMenuOpen: false,
     },
   );
   const menusHandler = (event: React.MouseEvent<HTMLElement>, target: string) => {
     if (target === 'menu') {
       setState({ navbarMenu: event.currentTarget, navbarUserMenu: null });
     } else if (target === 'userMenu') {
-      setState({ navbarMenu: null, navbarUserMenu: event.currentTarget });
+      if (authToken) {
+        setState({ navbarMenu: null, navbarUserMenu: event.currentTarget });
+      } else {
+        setState({ authMenuOpen: state.authMenuOpen ? false : true });
+      }
     }
   };
 
@@ -117,6 +126,12 @@ const Navbar = (): JSX.Element => {
                 <MenuItem onClick={closeMenusHandler}>Profile</MenuItem>
                 <MenuItem onClick={closeMenusHandler}>My account</MenuItem>
               </Menu>
+              <Auth
+                open={state.authMenuOpen}
+                handleClose={(e) => {
+                  menusHandler(e, 'userMenu');
+                }}
+              />
             </Box>
           </Box>
         </Toolbar>
