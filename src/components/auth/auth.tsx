@@ -11,23 +11,27 @@ type Props = {
 };
 
 interface State {
+  label: string;
   isLogin: boolean;
   email: string;
   username: string;
   password: string;
   passwordRepeat: string;
   passwordResetMode: boolean;
+  passwordResetEmail: string;
 }
 
 const Auth = ({ open, handleClose }: Props): JSX.Element => {
   const { authToken, darkMode } = useAuthStore((state) => state);
   const [state, setState] = useReducer((state: State, action: Partial<State>) => ({ ...state, ...action }), {
+    label: 'Sign In',
     isLogin: true,
     email: '',
     username: '',
     password: '',
     passwordRepeat: '',
     passwordResetMode: false,
+    passwordResetEmail: '',
   });
   const authInputsHandler = (newValue: string, element: string) => {
     setState({ [element]: newValue });
@@ -37,13 +41,42 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
     console.log('Form submit handler');
   };
   // Password reset
-  const passwordResetHandler = () => {
+  const togglePasswordResetMode = () => {
+    setState({
+      passwordResetMode: !state.passwordResetMode,
+      passwordResetEmail: '',
+      label: state.passwordResetMode ? (state.isLogin ? 'Sign In' : 'Sign Up') : 'Reset Password',
+    });
+  };
+  const passwordResetHandler = (event: React.FormEvent) => {
+    event.preventDefault();
     console.log('Password reset handler');
+    togglePasswordResetMode();
   };
   const passwordResetNode = state.passwordResetMode ? (
-    <form className={`auth-pass-reset`}>
-      <Box className={``}></Box>
-      <Box className={``}></Box>
+    <form className={`auth-pass-reset auth-form`} onSubmit={passwordResetHandler}>
+      <Box className={`auth-inputs`}>
+        <TextField
+          className={`auth-input`}
+          value={state.passwordResetEmail}
+          onChange={(event) => {
+            authInputsHandler(event.target.value, 'passwordResetEmail');
+          }}
+          required
+          fullWidth
+          label="Email Address"
+          type="email"
+          autoComplete="email"
+        />
+      </Box>
+      <Box className={`auth-buttons`}>
+        <Button onClick={togglePasswordResetMode} size="large" variant="outlined" className={`auth-button`}>
+          Back
+        </Button>
+        <Button type="submit" size="large" variant="contained" className={`auth-button`}>
+          Reset Password
+        </Button>
+      </Box>
     </form>
   ) : null;
   return (
@@ -57,89 +90,86 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
       <Card className={`auth`}>
         <Box className={`auth-header`}>
           <Typography variant="h5" component="h2">
-            Auth Header
+            {state.label}
           </Typography>
         </Box>
-        <form className="auth-form" onSubmit={authFormSubmitHandler}>
-          <Box className={`auth-inputs`}>
-            <TextField
-              className={`auth-input`}
-              value={state.email}
-              onChange={(event) => {
-                authInputsHandler(event.target.value, 'email');
-              }}
-              required
-              fullWidth
-              label="Email Address"
-              type="email"
-              autoComplete="email"
-            />
-            {state.isLogin ? null : (
+        {passwordResetNode ? (
+          passwordResetNode
+        ) : (
+          <form className={`auth-login auth-form`} onSubmit={authFormSubmitHandler}>
+            <Box className={`auth-inputs`}>
               <TextField
                 className={`auth-input`}
-                value={state.username}
+                value={state.email}
                 onChange={(event) => {
-                  authInputsHandler(event.target.value, 'username');
+                  authInputsHandler(event.target.value, 'email');
                 }}
                 required
                 fullWidth
-                label="Username"
-                type="text"
+                label="Email Address"
+                type="email"
+                autoComplete="email"
               />
-            )}
-            <TextField
-              className={`auth-input`}
-              value={state.password}
-              onChange={(event) => {
-                authInputsHandler(event.target.value, 'password');
-              }}
-              required
-              fullWidth
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-            />
-            {state.isLogin ? null : (
+              {state.isLogin ? null : (
+                <TextField
+                  className={`auth-input`}
+                  value={state.username}
+                  onChange={(event) => {
+                    authInputsHandler(event.target.value, 'username');
+                  }}
+                  required
+                  fullWidth
+                  label="Username"
+                  type="text"
+                />
+              )}
               <TextField
                 className={`auth-input`}
-                value={state.passwordRepeat}
+                value={state.password}
                 onChange={(event) => {
-                  authInputsHandler(event.target.value, 'passwordRepeat');
+                  authInputsHandler(event.target.value, 'password');
                 }}
                 required
                 fullWidth
-                label="Repeat Password"
+                label="Password"
                 type="password"
                 autoComplete="current-password"
               />
-            )}
-          </Box>
-          <Box className={`auth-buttons`}>
-            <Button
+              {state.isLogin ? null : (
+                <TextField
+                  className={`auth-input`}
+                  value={state.passwordRepeat}
+                  onChange={(event) => {
+                    authInputsHandler(event.target.value, 'passwordRepeat');
+                  }}
+                  required
+                  fullWidth
+                  label="Repeat Password"
+                  type="password"
+                  autoComplete="current-password"
+                />
+              )}
+            </Box>
+            <Box className={`auth-buttons`}>
+              <Button onClick={togglePasswordResetMode} size="large" variant="outlined" className={`auth-button`}>
+                Reset Password
+              </Button>
+              <Button type="submit" size="large" variant="contained" className={`auth-button`}>
+                {state.isLogin ? 'Sign In' : 'Sign Up'}
+              </Button>
+            </Box>
+            <Typography
+              className={`auth-toggle`}
               onClick={() => {
-                setState({ passwordResetMode: !state.passwordResetMode });
+                setState({ isLogin: !state.isLogin, label: state.isLogin ? 'Sign Up' : 'Sign In' });
               }}
-              size="large"
-              variant="outlined"
-              className={`auth-button`}
+              variant="h6"
+              component="h2"
             >
-              Reset Password
-            </Button>
-            <Button size="large" variant="contained" className={`auth-button`}>
-              {state.isLogin ? 'Sign In' : 'Sign Up'}
-            </Button>
-          </Box>
-          <Typography
-            className={`auth-toggle`}
-            onClick={() => {
-              setState({ isLogin: !state.isLogin });
-            }}
-            variant="h6"
-            component="h2"
-          >
-            {state.isLogin ? 'Create new account' : 'Use existing account'}
-          </Typography>
-        </form>
+              {state.isLogin ? 'Create new account' : 'Use existing account'}
+            </Typography>
+          </form>
+        )}
       </Card>
     </Modal>
   );

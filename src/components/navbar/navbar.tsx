@@ -69,20 +69,37 @@ const Navbar = (): JSX.Element => {
               <IconButton className={`navbar-title-icon-container icon-container`} size="large" color="inherit">
                 <FaHome className={`navbar-title-icon icon`} />
               </IconButton>
-              <Typography className={`navbar-title`} variant="h5">
-                Starter App
-              </Typography>
+              {mobile ? null : (
+                <Typography className={`navbar-title`} variant="h5">
+                  Starter App
+                </Typography>
+              )}
             </Box>
-            <Box className={`navbar-main-menu`}>Menu</Box>
-            <Box className={`navbar-main-links`}>Links</Box>
+            <Box className={`navbar-main-menu`}>
+              {mobile ? (
+                <IconButton
+                  className={`navbar-dark-mode icon-container`}
+                  size="large"
+                  aria-label="dark mode toggle"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  color="inherit"
+                >
+                  <HiOutlineMenu></HiOutlineMenu>
+                </IconButton>
+              ) : (
+                <Button variant="outlined" color="error">
+                  Menu
+                </Button>
+              )}
+            </Box>
+            {mobile ? null : <Box className={`navbar-main-links`}>Links</Box>}
           </Box>
           <Box className={`navbar-util`}>
             <IconButton
               className={`navbar-dark-mode icon-container`}
               size="large"
               aria-label="dark mode toggle"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
               onClick={toggleDarkMode}
               color="inherit"
             >

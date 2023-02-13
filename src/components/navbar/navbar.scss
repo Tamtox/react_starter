@@ -1,4 +1,4 @@
-@import '../../styles/_mixins';
+@import '@/styles/_mixins';
 .navbar {
   position: fixed;
   top: 0;
@@ -34,6 +34,8 @@
         gap: 1rem;
       }
       .navbar-main-menu {
+      }
+      .navbar-main-links {
       }
     }
     .navbar-util {
