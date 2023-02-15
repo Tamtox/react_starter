@@ -45,7 +45,6 @@ const Home: React.FC = (): JSX.Element => {
     queryKey: ['posts'],
     queryFn: (queryKey) =>
       wait(1).then(() => {
-        console.log(queryKey);
         return [...posts];
       }),
   });

@@ -1,4 +1,11 @@
 @import '@/styles/_mixins';
 
-.navbar-menu {
+.navbar-main-menu {
+  .navbar-menu {
+    position: fixed;
+    margin-top: 1rem;
+    width: 20rem;
+    height: 20rem;
+    z-index: 50;
+  }
 }

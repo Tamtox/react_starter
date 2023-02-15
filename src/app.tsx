@@ -1,4 +1,6 @@
-import '@/app.scss';
+import '@/styles/app.scss';
+import '@/styles/animation.scss';
+import '@/styles/global_classes.scss';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -64,7 +66,7 @@ function App() {
           mode: darkMode ? 'dark' : 'light',
           background: {
             default: darkMode ? '#000000' : '#FAF9F6',
-            paper: darkMode ? '#0f0f0f' : '#ffffff',
+            paper: darkMode ? '#100F0F' : '#ffffff',
           },
           // text: {
           //   primary: darkMode ? '#ffffff' : '#000000',
@@ -73,13 +75,13 @@ function App() {
           //   // hint: darkMode ? '#ffffff' : '#000000',
           // },
           primary: {
-            main: '#645CAA',
+            main: '#796fc5',
             light: '#EBC7E8',
             dark: '#1C3879',
             contrastText: '#fff',
           },
           secondary: {
-            main: '#9c27b0',
+            main: '#ffffff',
             light: '#ba68c8',
             dark: '#7b1fa2',
             contrastText: '#fff',

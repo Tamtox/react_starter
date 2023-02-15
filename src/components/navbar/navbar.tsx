@@ -1,37 +1,15 @@
 import './navbar.scss';
 
-import {
-  alpha,
-  AppBar,
-  Badge,
-  Box,
-  Button,
-  Drawer,
-  Icon,
-  IconButton,
-  InputBase,
-  Menu,
-  MenuItem,
-  styled,
-  Toolbar,
-  Tooltip,
-  Typography,
-  useMediaQuery,
-} from '@mui/material';
-import { stat } from 'fs';
+import { AppBar, Box, IconButton, Toolbar, Typography, useMediaQuery } from '@mui/material';
 import React, { useReducer } from 'react';
-import { FaHome, FaRegMoon, FaRegSun } from 'react-icons/fa';
-import { HiOutlineMenu } from 'react-icons/hi';
-import { MdNotificationsNone, MdOutlineAccountCircle, MdSearch } from 'react-icons/md';
+import { FaHome } from 'react-icons/fa';
 
+import NavbarMenu from '@/components/navbar/navbar_menu';
+import NavbarUserMenu from '@/components/navbar/navbar_user_menu';
 import { IAuthStore, useAuthStore } from '@/store/auth_store';
 
-import Auth from '../auth/auth';
-
 interface INavbarState {
-  navbarMenu: null | HTMLElement;
-  navbarUserMenu: null | HTMLElement;
-  authMenuOpen: boolean;
+  blank: string;
 }
 
 const Navbar = (): JSX.Element => {
@@ -39,27 +17,8 @@ const Navbar = (): JSX.Element => {
   const mobile = useMediaQuery('(max-width:700px)');
   const [state, setState] = useReducer(
     (state: INavbarState, action: Partial<INavbarState>) => ({ ...state, ...action }),
-    {
-      navbarMenu: null,
-      navbarUserMenu: null,
-      authMenuOpen: false,
-    },
+    { blank: '' },
   );
-  const menusHandler = (event: React.MouseEvent<HTMLElement>, target: string) => {
-    if (target === 'menu') {
-      setState({ navbarMenu: event.currentTarget, navbarUserMenu: null });
-    } else if (target === 'userMenu') {
-      if (authToken) {
-        setState({ navbarMenu: null, navbarUserMenu: event.currentTarget });
-      } else {
-        setState({ authMenuOpen: state.authMenuOpen ? false : true });
-      }
-    }
-  };
-
-  const closeMenusHandler = () => {
-    setState({ navbarMenu: null, navbarUserMenu: null });
-  };
   return (
     <>
       <AppBar className={`navbar`} position="fixed">
@@ -71,85 +30,15 @@ const Navbar = (): JSX.Element => {
               </IconButton>
               {mobile ? null : (
                 <Typography className={`navbar-title`} variant="h5">
-                  Starter App
+                  App Name
                 </Typography>
               )}
             </Box>
-            <Box className={`navbar-main-menu`}>
-              {mobile ? (
-                <IconButton
-                  className={`navbar-dark-mode icon-container`}
-                  size="large"
-                  aria-label="dark mode toggle"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  color="inherit"
-                >
-                  <HiOutlineMenu></HiOutlineMenu>
-                </IconButton>
-              ) : (
-                <Button variant="outlined" color="error">
-                  Menu
-                </Button>
-              )}
-            </Box>
+            <NavbarMenu />
             {mobile ? null : <Box className={`navbar-main-links`}>Links</Box>}
           </Box>
           <Box className={`navbar-util`}>
-            <IconButton
-              className={`navbar-dark-mode icon-container`}
-              size="large"
-              aria-label="dark mode toggle"
-              onClick={toggleDarkMode}
-              color="inherit"
-            >
-              {darkMode ? (
-                <FaRegSun className={`navbar-dark-mode-sun icon`} />
-              ) : (
-                <FaRegMoon className={`navbar-dark-mode-moon icon`} />
-              )}
-            </IconButton>
-            <Box className={`navbar-user`}>
-              <IconButton
-                className={`navbar-user-icon icon-container`}
-                size="large"
-                aria-label="account of current user"
-                aria-controls="navbar-user-menu"
-                aria-haspopup="true"
-                onClick={(e) => {
-                  menusHandler(e, 'userMenu');
-                }}
-                color="inherit"
-              >
-                <MdOutlineAccountCircle className={`icon`} />
-              </IconButton>
-              <Menu
-                className={`navbar-user-menu`}
-                id="navbar-user-menu"
-                sx={{ marginTop: '10px', padding: '10rem' }}
-                anchorEl={state.navbarUserMenu}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'center',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'center',
-                }}
-                open={Boolean(state.navbarUserMenu)}
-                onClose={closeMenusHandler}
-              >
-                <MenuItem onClick={closeMenusHandler}>Profile</MenuItem>
-                <MenuItem onClick={closeMenusHandler}>My account</MenuItem>
-              </Menu>
-              <Auth
-                open={state.authMenuOpen}
-                handleClose={(e) => {
-                  menusHandler(e, 'userMenu');
-                }}
-              />
-            </Box>
+            <NavbarUserMenu />
           </Box>
         </Toolbar>
       </AppBar>

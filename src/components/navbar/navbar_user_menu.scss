@@ -1,3 +1,25 @@
 @import '@/styles/_mixins';
-.navbar-user-menu {
+
+.navbar-user {
+  .navbar-user-menu {
+    @include flex(flex-start, center, column);
+    position: fixed;
+    margin-top: 1rem;
+    right: 1rem;
+    width: calc(min(18rem, 100%));
+    height: fit-content;
+    padding: 1rem;
+    gap: 1rem;
+    z-index: 50;
+    .user-menu-header {
+      @include flex;
+      width: 100%;
+      gap: 1rem;
+    }
+    .user-menu-body {
+      @include flex;
+      width: 100%;
+      gap: 1rem;
+    }
+  }
 }

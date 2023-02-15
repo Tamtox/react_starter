@@ -14,7 +14,7 @@ export interface IAuthStore {
 
 export const useAuthStore = create<IAuthStore>((set) => ({
   darkMode: darkMode === 'true' ? true : false,
-  authToken: '123',
+  authToken: undefined,
   toggleDarkMode: () =>
     set((state: IAuthStore) => {
       Cookies.set('darkMode', `${!state.darkMode}`, {
