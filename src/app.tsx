@@ -75,7 +75,7 @@ function App() {
           //   // hint: darkMode ? '#ffffff' : '#000000',
           // },
           primary: {
-            main: '#796fc5',
+            main: darkMode ? '#B1B2FF' : '#51499f',
             light: '#EBC7E8',
             dark: '#1C3879',
             contrastText: '#fff',

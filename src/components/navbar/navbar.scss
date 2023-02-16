@@ -4,7 +4,7 @@
   top: 0;
   z-index: 100;
   @include flex;
-  .navbar-container {
+  .navbar__container {
     width: calc(min(110rem, 100%));
     @include flex(space-between, center);
     margin: auto;
@@ -26,21 +26,19 @@
     .nav-element-dark {
       @extend .nav-element;
     }
-    .navbar-main {
+    .navbar__main {
       @include flex(flex-start, center);
       gap: 1rem;
-      .navbar-main-title-container {
+      .navbar__title {
         @include flex(flex-start, center);
         gap: 1rem;
       }
-      .navbar-main-links {
+      .navbar__main__links {
       }
     }
-    .navbar-util {
+    .navbar__util {
       @include flex(flex-end, center);
       gap: 1rem;
-      .navbar-dark-mode {
-      }
     }
   }
 }

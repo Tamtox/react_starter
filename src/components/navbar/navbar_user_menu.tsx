@@ -43,49 +43,28 @@ const NavbarUserMenu = () => {
   };
   useOnClickOutside(navbarUserMenuRef, closeNavbarUserMenu);
   return (
-    <Box className={`navbar-user`} ref={navbarUserMenuRef}>
-      <IconButton
-        className={`navbar-user-icon icon-container`}
-        size="large"
-        color="inherit"
-        onClick={toggleNavbarUserMenu}
-      >
+    <Box className={`navbar__user`} ref={navbarUserMenuRef}>
+      <IconButton className={`icon-container`} size="large" color="inherit" onClick={toggleNavbarUserMenu}>
         <MdOutlineAccountCircle className={`icon`} />
       </IconButton>
       <Auth open={state.authMenuOpen} handleClose={authMenuHandler} />
       {state.navbarUserMenuOpen ? (
-        <Card className={`navbar-user-menu fade-in-top`}>
-          <Box className={`user-menu-header`}>
+        <Card className={`navbar__user__menu fade-in-top`}>
+          <Button className={`user__menu__header user__menu__element`}>
             <FaRegUserCircle className={`icon`} />
-            <Typography variant="h6">{`${authToken ? 'Hello username' : 'Welcome, Guest'}`}</Typography>
-          </Box>
-          <Box className={`user-menu-body`}>
-            <Button
-              className={`user-menu-dark-mode`}
-              size="large"
-              startIcon={
-                darkMode ? <FaRegMoon className={`dark-mode-sun`} /> : <FaRegSun className={`dark-mode-moon`} />
-              }
-              fullWidth
-              onClick={toggleDarkMode}
-            >
-              {darkMode ? 'Dark Mode' : 'Light Mode'}
-            </Button>
-          </Box>
-          <Button
-            className={`user-menu-auth-button`}
-            size="large"
-            startIcon={
-              authToken ? (
-                <FaSignOutAlt className={`user-menu-auth-button-icon`} />
-              ) : (
-                <FaSignInAlt className={`user-menu-auth-button-icon`} />
-              )
-            }
-            fullWidth
-            onClick={authMenuHandler}
-          >
-            {authToken ? 'Sign Out' : 'Sign In/Sign Up'}
+            <Typography>{`${authToken ? 'Hello username' : 'Welcome, Guest'}`}</Typography>
+          </Button>
+          <Button className={`user__menu__dark-mode user__menu__element`} onClick={toggleDarkMode}>
+            {darkMode ? <FaRegMoon className={`dark-mode-sun icon`} /> : <FaRegSun className={`dark-mode-moon icon`} />}
+            <Typography variant="body1">{darkMode ? 'Dark Mode' : 'Light Mode'}</Typography>
+          </Button>
+          <Button className={`user__menu__auth user__menu__element`} onClick={authMenuHandler}>
+            {authToken ? (
+              <FaSignOutAlt className={`auth-button__icon icon`} />
+            ) : (
+              <FaSignInAlt className={`auth-button__icon icon`} />
+            )}
+            <Typography variant="body1">{authToken ? 'Sign Out' : 'Sign In/Sign Up'}</Typography>
           </Button>
         </Card>
       ) : null}

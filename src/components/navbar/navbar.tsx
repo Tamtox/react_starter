@@ -22,22 +22,18 @@ const Navbar = (): JSX.Element => {
   return (
     <>
       <AppBar className={`navbar`} position="fixed">
-        <Toolbar className={`navbar-container`}>
-          <Box className={`navbar-main`}>
-            <Box className={`navbar-main-title-container`}>
-              <IconButton className={`navbar-title-icon-container icon-container`} size="large" color="inherit">
-                <FaHome className={`navbar-title-icon icon`} />
+        <Toolbar className={`navbar__container`}>
+          <Box className={`navbar__main`}>
+            <Box className={`navbar__title`}>
+              <IconButton className={`icon-container`} size="large" color="inherit">
+                <FaHome className={`icon`} />
               </IconButton>
-              {mobile ? null : (
-                <Typography className={`navbar-title`} variant="h5">
-                  App Name
-                </Typography>
-              )}
+              {mobile ? null : <Typography variant="h5">App Name</Typography>}
             </Box>
             <NavbarMenu />
             {mobile ? null : <Box className={`navbar-main-links`}>Links</Box>}
           </Box>
-          <Box className={`navbar-util`}>
+          <Box className={`navbar__util`}>
             <NavbarUserMenu />
           </Box>
         </Toolbar>

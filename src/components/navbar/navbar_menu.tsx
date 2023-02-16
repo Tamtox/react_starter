@@ -29,29 +29,22 @@ const NavbarMenu = () => {
   };
   useOnClickOutside(navbarMenuRef, closeNavbarMenu);
   return (
-    <Box className={`navbar-main-menu`} ref={navbarMenuRef}>
+    <Box className={`navbar__menu`} ref={navbarMenuRef}>
       {mobile ? (
-        <IconButton
-          className={`navbar-main-menu-icon-container icon-container`}
-          size="large"
-          color="inherit"
-          onClick={toggleNavbarMenu}
-        >
-          <HiOutlineMenu className={`navbar-main-menu-icon icon`} />
+        <IconButton className={`icon-container`} size="large" color="inherit" onClick={toggleNavbarMenu}>
+          <HiOutlineMenu className={`icon`} />
         </IconButton>
       ) : (
         <Button
-          className={`navbar-main-menu-button`}
-          sx={{ fontSize: '1.1rem' }}
-          color="secondary"
+          sx={{ fontSize: '1.2rem', color: 'white' }}
           size="large"
-          startIcon={<HiOutlineMenu className={`navbar-main-menu-button-icon icon`} />}
+          startIcon={<HiOutlineMenu className={`icon`} />}
           onClick={toggleNavbarMenu}
         >
           Menu
         </Button>
       )}
-      {state.navbarMenuOpen ? <Card className={`navbar-menu fade-in-top`}></Card> : null}
+      {state.navbarMenuOpen ? <Card className={`navbar__menu__dropdown fade-in-top`}></Card> : null}
     </Box>
   );
 };
