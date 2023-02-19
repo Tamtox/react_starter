@@ -1,9 +1,8 @@
 import './navbar_menu.scss';
 
 import { Box, Button, Card, IconButton, useMediaQuery } from '@mui/material';
-import React, { useEffect, useReducer, useRef } from 'react';
+import React, { useReducer, useRef } from 'react';
 import { HiOutlineMenu } from 'react-icons/hi';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 
@@ -20,7 +19,6 @@ const NavbarMenu = () => {
       navbarMenuOpen: false,
     },
   );
-  // Navbar menu controls
   const toggleNavbarMenu = () => {
     setState({ navbarMenuOpen: !state.navbarMenuOpen });
   };
@@ -44,7 +42,26 @@ const NavbarMenu = () => {
           Menu
         </Button>
       )}
-      {state.navbarMenuOpen ? <Card className={`navbar__menu__dropdown fade-in-top`}></Card> : null}
+      {state.navbarMenuOpen ? (
+        mobile ? (
+          <Card className={`navbar__menu__panel__mobile slide-in-left`}>
+            <Button
+              sx={{ fontSize: '1.2rem', color: 'white' }}
+              size="large"
+              startIcon={<HiOutlineMenu className={`icon`} />}
+              onClick={closeNavbarMenu}
+            >
+              Menu
+            </Button>
+          </Card>
+        ) : (
+          <Card className={`navbar__menu__panel fade-in-top`}>
+            <Box className={`navbar__menu__wrapper`}>
+              <Button variant="contained">123</Button>
+            </Box>
+          </Card>
+        )
+      ) : null}
     </Box>
   );
 };

@@ -1,11 +1,30 @@
 @import '@/styles/_mixins';
 
 .navbar__menu {
-  .navbar__menu__dropdown {
+  .navbar__menu__panel {
     position: fixed;
-    margin-top: 1rem;
-    width: 20rem;
+    width: 100%;
     height: 20rem;
+    top: 4rem;
+    left: 0;
     z-index: 50;
+    border-radius: 0;
+    box-shadow: none;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    .navbar__menu__wrapper {
+      width: calc(min(110rem, 100%));
+      height: 100%;
+      margin: auto;
+      padding: 1rem 0 1rem 0;
+    }
+  }
+  .navbar__menu__panel__mobile {
+    position: fixed;
+    width: calc(min(25rem, 100%));
+    height: 100vh;
+    top: 0;
+    left: 0;
+    border-radius: 0;
   }
 }

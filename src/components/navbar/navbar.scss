@@ -4,6 +4,9 @@
   top: 0;
   z-index: 100;
   @include flex;
+  box-shadow: none;
+  height: 4rem;
+  z-index: 50;
   .navbar__container {
     width: calc(min(110rem, 100%));
     @include flex(space-between, center);

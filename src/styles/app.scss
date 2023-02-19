@@ -6,7 +6,7 @@
     width: calc(min(110rem, 100%));
     min-height: 100vh;
     margin: auto;
-    padding: 10vh 1rem 0 1rem;
+    padding: 4rem 0rem 0 0rem;
   }
 }
 
@@ -16,11 +16,6 @@
 
 /* Mobile */
 @media (max-width: 700px) {
-  .app {
-    .wrapper {
-      padding: 12vh 1rem 0 1rem;
-    }
-  }
 }
 
 /* Tablet and Smaller Desktop */

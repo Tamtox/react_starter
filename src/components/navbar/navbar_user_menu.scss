@@ -10,7 +10,6 @@
     height: fit-content;
     padding: 1rem;
     gap: 0.5rem;
-    z-index: 50;
     .user__menu__element {
       width: 100%;
       @include flex(flex-start, center);

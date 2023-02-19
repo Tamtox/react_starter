@@ -7,7 +7,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 // eslint-disable-next-line prettier/prettier
-import { Box, Container, createTheme, CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material';
+import { Container, createTheme, CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material';
 import React, { Suspense, useMemo } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ const Loading = React.lazy(() => import('./components/loading/Loading'));
 import Navbar from '@/components/navbar/navbar';
 
 function App() {
-  const { authToken, darkMode, toggleDarkMode } = useAuthStore((state: IAuthStore) => state);
+  const { authToken, darkMode } = useAuthStore((state: IAuthStore) => state);
   const myTheme = useMemo(
     () =>
       createTheme({
@@ -95,7 +95,6 @@ function App() {
       }),
     [darkMode],
   );
-
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={myTheme}>

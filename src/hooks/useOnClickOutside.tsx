@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 
 // Fires the callback when click outside provided ref
 const useOnClickOutside = (ref: any, closeHandler: () => void) => {
+  const handleClickOutside = (event: any) => {
+    if (!ref.current || ref.current.contains(event.target)) {
+      return;
+    }
+    closeHandler();
+  };
   useEffect(() => {
-    const eventListener = (event: any) => {
-      if (!ref.current || ref.current.contains(event.target)) {
-        return;
-      }
-      closeHandler();
-    };
-    document.addEventListener('click', eventListener);
+    document.addEventListener('click', handleClickOutside);
     return () => {
-      document.removeEventListener('click', eventListener);
+      document.removeEventListener('click', handleClickOutside);
     };
   }, [ref, closeHandler]);
 };
