@@ -19,7 +19,7 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 import Loading from '@/components/loading/Loading';
 import { IAuthStore, useAuthStore } from '@/store/auth_store';
-import { IPostsStore, usePostsStore } from '@/store/posts_store';
+import { IEventsStore, useEventsStore } from '@/store/events_store';
 
 interface IHomeState {
   search: string;
@@ -33,7 +33,7 @@ function wait(durationSeconds: number) {
 
 const Home: React.FC = (): JSX.Element => {
   const { darkMode, toggleDarkMode } = useAuthStore((state: IAuthStore) => state);
-  const { posts, addPost, deletePost } = usePostsStore((state: IPostsStore) => state);
+  const { events } = useEventsStore((state: IEventsStore) => state);
   const [state, setState] = useReducer((state: IHomeState, action: Partial<IHomeState>) => ({ ...state, ...action }), {
     search: '',
     query: 'name',
@@ -45,13 +45,13 @@ const Home: React.FC = (): JSX.Element => {
     queryKey: ['posts'],
     queryFn: (queryKey) =>
       wait(1).then(() => {
-        return [...posts];
+        return [...events];
       }),
   });
   const mutation = useMutation({
-    mutationFn: (title: string) => {
-      return wait(1).then(() => posts.push({ id: crypto.randomUUID(), title }));
-    },
+    // mutationFn: (title: string) => {
+    //   return wait(1).then(() => events.push({ id: crypto.randomUUID(), title }));
+    // },
     onSuccess: () => {
       queryClient.invalidateQueries(['posts']);
     },
@@ -64,7 +64,7 @@ const Home: React.FC = (): JSX.Element => {
         <Button
           variant="outlined"
           onClick={() => {
-            mutation.mutate('new post');
+            // mutation.mutate('new post');
           }}
         >
           Add

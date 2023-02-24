@@ -5,6 +5,7 @@ import React, { useReducer, useRef } from 'react';
 import { HiOutlineMenu } from 'react-icons/hi';
 
 import useOnClickOutside from '@/hooks/useOnClickOutside';
+import { useAuthStore } from '@/store/auth_store';
 
 interface INavbarMenuState {
   navbarMenuOpen: boolean;
@@ -13,6 +14,7 @@ interface INavbarMenuState {
 const NavbarMenu = () => {
   const mobile = useMediaQuery('(max-width:700px)');
   const navbarMenuRef = useRef<HTMLDivElement>(null);
+  const { darkMode } = useAuthStore((state) => state);
   const [state, setState] = useReducer(
     (state: INavbarMenuState, action: Partial<INavbarMenuState>) => ({ ...state, ...action }),
     {
@@ -46,8 +48,8 @@ const NavbarMenu = () => {
         mobile ? (
           <Card className={`navbar__menu__panel__mobile slide-in-left`}>
             <Button
-              sx={{ fontSize: '1.2rem', color: 'white' }}
-              size="large"
+              sx={{ fontSize: '1.2rem' }}
+              variant="outlined"
               startIcon={<HiOutlineMenu className={`icon`} />}
               onClick={closeNavbarMenu}
             >
@@ -56,7 +58,7 @@ const NavbarMenu = () => {
           </Card>
         ) : (
           <Card className={`navbar__menu__panel fade-in-top`}>
-            <Box className={`navbar__menu__wrapper`}>
+            <Box className={`navbar__menu__container`}>
               <Button variant="contained">123</Button>
             </Box>
           </Card>

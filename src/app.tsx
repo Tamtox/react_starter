@@ -23,13 +23,6 @@ function App() {
     () =>
       createTheme({
         components: {
-          MuiContainer: {
-            styleOverrides: {
-              root: {
-                padding: '0 5px 0 5px',
-              },
-            },
-          },
           // MuiTypography: {
           //   styleOverrides: {
           //     root: {
@@ -40,23 +33,12 @@ function App() {
             styleOverrides: {
               root: {
                 boxShadow: `0px 1px 3px ${'#000000'}`,
-                padding: '1rem',
-              },
-            },
-          },
-          MuiTextField: {
-            styleOverrides: {
-              root: {
-                fontSize: '1rem',
-                width: 'calc(min(100%, 100%))',
-                height: '36px',
               },
             },
           },
           MuiButton: {
             styleOverrides: {
               root: {
-                fontSize: '1rem',
                 textTransform: 'none',
               },
             },

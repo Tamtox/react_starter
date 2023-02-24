@@ -1,6 +1,6 @@
 @import '@/styles/_mixins';
 
-.auth-modal {
+.auth__modal {
   .auth {
     width: calc(min(35rem, 90%));
     height: calc(min(40rem, 95%));
@@ -10,32 +10,29 @@
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 1rem;
-    .auth-header {
+    .auth__header {
       @include flex;
     }
-    .auth-form {
+    .auth__form {
       @include grid(70% 15% 15%, 100%);
       gap: 1rem;
-      .auth-inputs {
+      .auth__inputs {
         @include widthAndHeight(100%, 100%);
-        margin: auto;
-        display: grid;
-        grid-template-columns: 100%;
-        grid-auto-rows: 3rem;
-        align-content: center;
-        gap: 2rem;
-        .auth-input {
+        @include flex;
+        flex-direction: column;
+        gap: 1rem;
+        .auth__input {
         }
       }
-      .auth-buttons {
+      .auth__buttons {
         @include widthAndHeight(100%, 100%);
         @include flex;
         gap: 1rem;
-        .auth-button {
+        .auth__button {
           width: calc(min(15rem, 100%));
         }
       }
-      .auth-toggle {
+      .auth__toggle {
         @include widthAndHeight(100%, 100%);
         @include flex(center, flex-start);
         cursor: pointer;

@@ -1,20 +1,27 @@
 import Cookies from 'js-cookie';
+import { MdSignalWifiStatusbarNull } from 'react-icons/md';
 import { create } from 'zustand';
 
 const authToken = Cookies.get('authToken');
 const darkMode = Cookies.get('darkMode');
 
+export interface IUserData {
+  email: string;
+}
+
 export interface IAuthStore {
-  darkMode: boolean;
   authToken: string | undefined;
+  darkMode: boolean;
+  userData: IUserData | null;
   toggleDarkMode: () => void;
   login: (newAuthToken: string) => void;
   logout: () => void;
 }
 
 export const useAuthStore = create<IAuthStore>((set) => ({
-  darkMode: darkMode === 'true' ? true : false,
   authToken: undefined,
+  darkMode: darkMode === 'true' ? true : false,
+  userData: null,
   toggleDarkMode: () =>
     set((state: IAuthStore) => {
       Cookies.set('darkMode', `${!state.darkMode}`, {
