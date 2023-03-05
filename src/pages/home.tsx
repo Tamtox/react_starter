@@ -26,10 +26,6 @@ interface IHomeState {
   eventTitle: string;
 }
 
-function wait(durationSeconds: number) {
-  return new Promise((resolve) => setTimeout(resolve, durationSeconds * 1000));
-}
-
 const Home: React.FC = (): JSX.Element => {
   const { darkMode, toggleDarkMode } = useAuthStore((state: IAuthStore) => state);
   const { events, setEvents, clearEvents, addEvent, deleteEvent } = useEventsStore((state: IEventsStore) => state);
@@ -40,10 +36,9 @@ const Home: React.FC = (): JSX.Element => {
   const queryClient = new QueryClient();
   const query = useQuery({
     queryKey: ['posts'],
-    queryFn: (queryKey) =>
-      wait(1).then(() => {
-        return [...events];
-      }),
+    queryFn: (queryKey) => {
+      return 1;
+    },
   });
   const mutation = useMutation({
     // mutationFn: (title: string) => {
@@ -55,35 +50,6 @@ const Home: React.FC = (): JSX.Element => {
   });
   if (query.isLoading) return <Loading height="100vh" />;
   if (query.isError) return <pre>{JSON.stringify(query.error)}</pre>;
-  const loadEvents = async () => {
-    try {
-      const eventResponse: { data: { events: [] } } = await axios.request({
-        method: 'GET',
-        url: `http://localhost:3001/getEvents`,
-        data: {},
-      });
-      const { events } = eventResponse.data;
-      setEvents(events);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const addEventHandler = async () => {
-    try {
-      const eventResponse: { data: { event: IEvent } } = await axios.request({
-        method: 'POST',
-        url: `http://localhost:3001/addEvent`,
-        data: { date: new Date().toISOString(), title: state.eventTitle },
-      });
-      const { event } = eventResponse.data;
-      addEvent(event);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    loadEvents();
-  }, []);
   return (
     <Container maxWidth={false} className="home">
       <Box className={`toolbar`}>

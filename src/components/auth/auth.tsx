@@ -6,6 +6,7 @@ import React, { useReducer } from 'react';
 import { MdLockOutline, MdOutlineAccountCircle, MdOutlineEmail } from 'react-icons/md';
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 
+import AuthPassReset from '@/components/auth/auth_pass_reset';
 import { useAuthStore } from '@/store/auth_store';
 
 type Props = {
@@ -59,44 +60,6 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
       label: state.passwordResetMode ? (state.isLogin ? 'Sign In' : 'Sign Up') : 'Reset Password',
     });
   };
-  const passwordResetHandler = (event: React.FormEvent) => {
-    event.preventDefault();
-    console.log('Password reset handler');
-    togglePasswordResetMode();
-  };
-  const passwordResetNode = state.passwordResetMode ? (
-    <form className={`auth__pass-reset auth__form`} onSubmit={passwordResetHandler}>
-      <Box className={`auth__inputs`}>
-        <TextField
-          className={`auth__input`}
-          value={state.passwordResetEmail}
-          onChange={(event) => {
-            authInputsHandler(event.target.value, 'passwordResetEmail');
-          }}
-          required
-          fullWidth
-          type="email"
-          autoComplete="email"
-          placeholder="Email"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <MdOutlineEmail className="icon" />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Box>
-      <Box className={`auth__buttons`}>
-        <Button onClick={togglePasswordResetMode} size="large" variant="outlined" className={`auth__button`}>
-          Back
-        </Button>
-        <Button type="submit" size="large" variant="contained" className={`auth__button`}>
-          Reset Password
-        </Button>
-      </Box>
-    </form>
-  ) : null;
   return (
     <Modal
       className={`auth__modal`}
@@ -111,8 +74,12 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
             {state.label}
           </Typography>
         </Box>
-        {passwordResetNode ? (
-          passwordResetNode
+        {state.passwordResetMode ? (
+          <AuthPassReset
+            passwordResetEmail={state.passwordResetEmail}
+            authInputsHandler={authInputsHandler}
+            togglePasswordResetMode={togglePasswordResetMode}
+          />
         ) : (
           <form className={`auth__sign-in auth__form`} onSubmit={authFormSubmitHandler}>
             <Box className={`auth__inputs`}>
@@ -223,22 +190,15 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
               )}
             </Box>
             <Box className={`auth__buttons`}>
-              <Button onClick={togglePasswordResetMode} size="large" variant="outlined" className={`auth__button`}>
+              {/* <Button onClick={togglePasswordResetMode} size="large" variant="outlined" className={`auth__button`}>
                 Reset Password
-              </Button>
+              </Button> */}
               <Button type="submit" size="large" variant="contained" className={`auth__button`}>
                 {state.isLogin ? 'Sign In' : 'Sign Up'}
               </Button>
             </Box>
-            <Typography
-              className={`auth__toggle`}
-              onClick={() => {
-                setState({ isLogin: !state.isLogin, label: state.isLogin ? 'Sign Up' : 'Sign In' });
-              }}
-              variant="h6"
-              component="h2"
-            >
-              {state.isLogin ? 'Create new account' : 'Use existing account'}
+            <Typography className={`auth__toggle`} onClick={togglePasswordResetMode} variant="h6" component="h2">
+              Forgot your password?
             </Typography>
           </form>
         )}
