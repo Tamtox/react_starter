@@ -8,12 +8,22 @@ export interface IEvent {
 
 export interface IEventsStore {
   events: IEvent[];
+  setEvents(events: IEvent[]): void;
+  clearEvents(): void;
   addEvent: (event: IEvent) => void;
   deleteEvent: (event: IEvent) => void;
 }
 
 export const useEventsStore = create<IEventsStore>((set) => ({
   events: [],
+  setEvents: (events: IEvent[]) =>
+    set(() => ({
+      events,
+    })),
+  clearEvents: () =>
+    set(() => ({
+      events: [],
+    })),
   addEvent: (event: IEvent) =>
     set((state) => ({
       events: [...state.events, event],

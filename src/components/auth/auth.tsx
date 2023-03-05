@@ -1,8 +1,10 @@
 import './auth.scss';
 
-import { Box, Button, Card, InputAdornment, Modal, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, IconButton, InputAdornment, Modal, TextField, Typography } from '@mui/material';
+import axios from 'axios';
 import React, { useReducer } from 'react';
-import { MdOutlineEmail } from 'react-icons/md';
+import { MdLockOutline, MdOutlineAccountCircle, MdOutlineEmail } from 'react-icons/md';
+import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 
 import { useAuthStore } from '@/store/auth_store';
 
@@ -17,6 +19,7 @@ interface State {
   email: string;
   username: string;
   password: string;
+  passwordVisible: boolean;
   passwordRepeat: string;
   passwordResetMode: boolean;
   passwordResetEmail: string;
@@ -30,6 +33,7 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
     email: '',
     username: '',
     password: '',
+    passwordVisible: false,
     passwordRepeat: '',
     passwordResetMode: false,
     passwordResetEmail: '',
@@ -75,7 +79,7 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
           autoComplete="email"
           placeholder="Email"
           InputProps={{
-            endAdornment: (
+            startAdornment: (
               <InputAdornment position="start">
                 <MdOutlineEmail className="icon" />
               </InputAdornment>
@@ -112,7 +116,6 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
         ) : (
           <form className={`auth__sign-in auth__form`} onSubmit={authFormSubmitHandler}>
             <Box className={`auth__inputs`}>
-              <Box></Box>
               <TextField
                 className={`auth__input`}
                 value={state.email}
@@ -124,6 +127,13 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
                 placeholder="Email"
                 type="email"
                 autoComplete="email"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <MdOutlineEmail className="icon" />
+                    </InputAdornment>
+                  ),
+                }}
               />
               {state.isLogin ? null : (
                 <TextField
@@ -136,6 +146,13 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
                   fullWidth
                   placeholder="Username"
                   type="text"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <MdOutlineAccountCircle className="icon" />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               )}
               <TextField
@@ -147,8 +164,28 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
                 required
                 fullWidth
                 placeholder="Password"
-                type="password"
+                type={state.passwordVisible ? 'text' : 'password'}
                 autoComplete="current-password"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <MdLockOutline className="icon" />
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton
+                        className={`icon-container`}
+                        color="inherit"
+                        onClick={() => {
+                          setState({ passwordVisible: !state.passwordVisible });
+                        }}
+                      >
+                        {state.passwordVisible ? <RxEyeOpen className="icon" /> : <RxEyeClosed className="icon" />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
               {state.isLogin ? null : (
                 <TextField
@@ -160,8 +197,28 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
                   required
                   fullWidth
                   placeholder="Repeat Password"
-                  type="password"
+                  type={state.passwordVisible ? 'text' : 'password'}
                   autoComplete="current-password"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <MdLockOutline className="icon" />
+                      </InputAdornment>
+                    ),
+                    endAdornment: (
+                      <InputAdornment position="start">
+                        <IconButton
+                          className={`icon-container`}
+                          color="inherit"
+                          onClick={() => {
+                            setState({ passwordVisible: !state.passwordVisible });
+                          }}
+                        >
+                          {state.passwordVisible ? <RxEyeOpen className="icon" /> : <RxEyeClosed className="icon" />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               )}
             </Box>

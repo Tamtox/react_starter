@@ -4,7 +4,7 @@
   .auth {
     width: calc(min(35rem, 90%));
     height: calc(min(40rem, 95%));
-    @include grid(20% 80%, 100%);
+    @include grid(15% 85%, 100%);
     position: absolute;
     top: 50%;
     left: 50%;
