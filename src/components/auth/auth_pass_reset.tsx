@@ -17,7 +17,7 @@ const AuthPassReset = ({ passwordResetEmail, authInputsHandler, togglePasswordRe
     <form className={`auth__pass-reset auth__form`} onSubmit={passwordResetHandler}>
       <Box className={`auth__inputs`}>
         <TextField
-          className={`auth__input`}
+          className={`auth__input scale-in-center`}
           value={passwordResetEmail}
           onChange={(event) => {
             authInputsHandler(event.target.value, 'passwordResetEmail');

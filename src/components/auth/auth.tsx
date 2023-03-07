@@ -60,6 +60,12 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
       label: state.passwordResetMode ? (state.isLogin ? 'Sign In' : 'Sign Up') : 'Reset Password',
     });
   };
+  const toggleAuthMode = () => {
+    setState({
+      isLogin: !state.isLogin,
+      label: state.isLogin ? 'Sign Up' : 'Sign In',
+    });
+  };
   return (
     <Modal
       className={`auth__modal`}
@@ -84,7 +90,7 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
           <form className={`auth__sign-in auth__form`} onSubmit={authFormSubmitHandler}>
             <Box className={`auth__inputs`}>
               <TextField
-                className={`auth__input`}
+                className={`auth__input scale-in-center`}
                 value={state.email}
                 onChange={(event) => {
                   authInputsHandler(event.target.value, 'email');
@@ -104,7 +110,7 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
               />
               {state.isLogin ? null : (
                 <TextField
-                  className={`auth__input`}
+                  className={`auth__input scale-in-center`}
                   value={state.username}
                   onChange={(event) => {
                     authInputsHandler(event.target.value, 'username');
@@ -123,7 +129,7 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
                 />
               )}
               <TextField
-                className={`auth__input`}
+                className={`auth__input scale-in-center`}
                 value={state.password}
                 onChange={(event) => {
                   authInputsHandler(event.target.value, 'password');
@@ -156,7 +162,7 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
               />
               {state.isLogin ? null : (
                 <TextField
-                  className={`auth__input`}
+                  className={`auth__input scale-in-center`}
                   value={state.passwordRepeat}
                   onChange={(event) => {
                     authInputsHandler(event.target.value, 'passwordRepeat');
@@ -190,15 +196,15 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
               )}
             </Box>
             <Box className={`auth__buttons`}>
-              {/* <Button onClick={togglePasswordResetMode} size="large" variant="outlined" className={`auth__button`}>
+              <Button onClick={togglePasswordResetMode} size="large" variant="outlined" className={`auth__button`}>
                 Reset Password
-              </Button> */}
+              </Button>
               <Button type="submit" size="large" variant="contained" className={`auth__button`}>
                 {state.isLogin ? 'Sign In' : 'Sign Up'}
               </Button>
             </Box>
-            <Typography className={`auth__toggle`} onClick={togglePasswordResetMode} variant="h6" component="h2">
-              Forgot your password?
+            <Typography className={`auth__toggle`} onClick={toggleAuthMode} variant="h6" component="h2">
+              {state.isLogin ? 'Use existing account' : 'Create new account'}
             </Typography>
           </form>
         )}

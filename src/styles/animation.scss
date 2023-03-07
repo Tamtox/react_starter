@@ -57,3 +57,33 @@
     opacity: 1;
   }
 }
+
+// Scale in center
+.scale-in-center {
+  -webkit-animation: scale-in-center 0.3s cubic-bezier(0.5, 0.7, 0.85, 0.95) both;
+  animation: scale-in-center 0.3s cubic-bezier(0.5, 0.7, 0.85, 0.95) both;
+}
+@-webkit-keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes scale-in-center {
+  0% {
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
