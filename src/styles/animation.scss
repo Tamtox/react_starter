@@ -65,8 +65,8 @@
 }
 @-webkit-keyframes scale-in-center {
   0% {
-    -webkit-transform: scale(0.95);
-    transform: scale(0.95);
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
     opacity: 0;
   }
   100% {
@@ -77,8 +77,8 @@
 }
 @keyframes scale-in-center {
   0% {
-    -webkit-transform: scale(0.95);
-    transform: scale(0.95);
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
     opacity: 0;
   }
   100% {
