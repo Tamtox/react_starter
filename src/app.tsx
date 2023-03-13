@@ -6,15 +6,14 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-// eslint-disable-next-line prettier/prettier
 import { Container, createTheme, CssBaseline, StyledEngineProvider, ThemeProvider } from '@mui/material';
 import React, { Suspense, useMemo } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { IAuthStore, useAuthStore } from '@/store/auth_store';
 
-const Home = React.lazy(() => import('./pages/home'));
-const Loading = React.lazy(() => import('./components/loading/Loading'));
+const Home = React.lazy(() => import('@/features/home/home'));
+const Loading = React.lazy(() => import('@/components/loading/Spinner'));
 import Navbar from '@/components/navbar/navbar';
 
 function App() {

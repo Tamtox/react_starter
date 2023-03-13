@@ -8,7 +8,7 @@ import { MdOutlineAccountCircle } from 'react-icons/md';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 import { IAuthStore, useAuthStore } from '@/store/auth_store';
 
-import Auth from '../auth/auth';
+import Auth from '@/features/auth/auth';
 
 interface INavbarUserMenuState {
   navbarUserMenuOpen: boolean;

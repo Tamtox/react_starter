@@ -6,7 +6,7 @@ import React, { useReducer } from 'react';
 import { MdLockOutline, MdOutlineAccountCircle, MdOutlineEmail } from 'react-icons/md';
 import { RxEyeClosed, RxEyeOpen } from 'react-icons/rx';
 
-import AuthPassReset from '@/components/auth/auth_pass_reset';
+import AuthPassReset from '@/features/auth/auth_pass_reset';
 import { useAuthStore } from '@/store/auth_store';
 
 type Props = {
@@ -204,7 +204,7 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
               </Button>
             </Box>
             <Typography className={`auth__toggle`} onClick={toggleAuthMode} variant="h6" component="h2">
-              {state.isLogin ? 'Use existing account' : 'Create new account'}
+              {state.isLogin ? 'Create new account' : 'Use existing account'}
             </Typography>
           </form>
         )}
