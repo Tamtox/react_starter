@@ -1,6 +1,5 @@
 import './auth.scss';
 
-import { Box, Button, Card, IconButton, InputAdornment, Modal, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import React, { useReducer } from 'react';
 import { MdLockOutline, MdOutlineAccountCircle, MdOutlineEmail } from 'react-icons/md';
@@ -67,149 +66,150 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
     });
   };
   return (
-    <Modal
-      className={`auth__modal`}
-      open={open}
-      onClose={handleClose}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Card className={`auth`}>
-        <Box className={`auth__header`}>
-          <Typography variant="h5" component="h2">
-            {state.label}
-          </Typography>
-        </Box>
-        {state.passwordResetMode ? (
-          <AuthPassReset
-            passwordResetEmail={state.passwordResetEmail}
-            authInputsHandler={authInputsHandler}
-            togglePasswordResetMode={togglePasswordResetMode}
-          />
-        ) : (
-          <form className={`auth__sign-in auth__form`} onSubmit={authFormSubmitHandler}>
-            <Box className={`auth__inputs`}>
-              <TextField
-                className={`auth__input scale-in-center`}
-                value={state.email}
-                onChange={(event) => {
-                  authInputsHandler(event.target.value, 'email');
-                }}
-                required
-                fullWidth
-                placeholder="Email"
-                type="email"
-                autoComplete="email"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <MdOutlineEmail className="icon" />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              {state.isLogin ? null : (
-                <TextField
-                  className={`auth__input scale-in-center`}
-                  value={state.username}
-                  onChange={(event) => {
-                    authInputsHandler(event.target.value, 'username');
-                  }}
-                  required
-                  fullWidth
-                  placeholder="Username"
-                  type="text"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <MdOutlineAccountCircle className="icon" />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              )}
-              <TextField
-                className={`auth__input scale-in-center`}
-                value={state.password}
-                onChange={(event) => {
-                  authInputsHandler(event.target.value, 'password');
-                }}
-                required
-                fullWidth
-                placeholder="Password"
-                type={state.passwordVisible ? 'text' : 'password'}
-                autoComplete="current-password"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <MdLockOutline className="icon" />
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment position="start">
-                      <IconButton
-                        className={`icon-container`}
-                        color="inherit"
-                        onClick={() => {
-                          setState({ passwordVisible: !state.passwordVisible });
-                        }}
-                      >
-                        {state.passwordVisible ? <RxEyeOpen className="icon" /> : <RxEyeClosed className="icon" />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              {state.isLogin ? null : (
-                <TextField
-                  className={`auth__input scale-in-center`}
-                  value={state.passwordRepeat}
-                  onChange={(event) => {
-                    authInputsHandler(event.target.value, 'passwordRepeat');
-                  }}
-                  required
-                  fullWidth
-                  placeholder="Repeat Password"
-                  type={state.passwordVisible ? 'text' : 'password'}
-                  autoComplete="current-password"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <MdLockOutline className="icon" />
-                      </InputAdornment>
-                    ),
-                    endAdornment: (
-                      <InputAdornment position="start">
-                        <IconButton
-                          className={`icon-container`}
-                          color="inherit"
-                          onClick={() => {
-                            setState({ passwordVisible: !state.passwordVisible });
-                          }}
-                        >
-                          {state.passwordVisible ? <RxEyeOpen className="icon" /> : <RxEyeClosed className="icon" />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              )}
-            </Box>
-            <Box className={`auth__buttons`}>
-              <Button onClick={togglePasswordResetMode} size="large" variant="outlined" className={`auth__button`}>
-                Reset Password
-              </Button>
-              <Button type="submit" size="large" variant="contained" className={`auth__button`}>
-                {state.isLogin ? 'Sign In' : 'Sign Up'}
-              </Button>
-            </Box>
-            <Typography className={`auth__toggle`} onClick={toggleAuthMode} variant="h6" component="h2">
-              {state.isLogin ? 'Create new account' : 'Use existing account'}
-            </Typography>
-          </form>
-        )}
-      </Card>
-    </Modal>
+    <div>Auth</div>
+    // <Modal
+    //   className={`auth__modal`}
+    //   open={open}
+    //   onClose={handleClose}
+    //   aria-labelledby="modal-modal-title"
+    //   aria-describedby="modal-modal-description"
+    // >
+    //   <Card className={`auth`}>
+    //     <Box className={`auth__header`}>
+    //       <Typography variant="h5" component="h2">
+    //         {state.label}
+    //       </Typography>
+    //     </Box>
+    //     {state.passwordResetMode ? (
+    //       <AuthPassReset
+    //         passwordResetEmail={state.passwordResetEmail}
+    //         authInputsHandler={authInputsHandler}
+    //         togglePasswordResetMode={togglePasswordResetMode}
+    //       />
+    //     ) : (
+    //       <form className={`auth__sign-in auth__form`} onSubmit={authFormSubmitHandler}>
+    //         <Box className={`auth__inputs`}>
+    //           <TextField
+    //             className={`auth__input scale-in-center`}
+    //             value={state.email}
+    //             onChange={(event) => {
+    //               authInputsHandler(event.target.value, 'email');
+    //             }}
+    //             required
+    //             fullWidth
+    //             placeholder="Email"
+    //             type="email"
+    //             autoComplete="email"
+    //             InputProps={{
+    //               startAdornment: (
+    //                 <InputAdornment position="start">
+    //                   <MdOutlineEmail className="icon" />
+    //                 </InputAdornment>
+    //               ),
+    //             }}
+    //           />
+    //           {state.isLogin ? null : (
+    //             <TextField
+    //               className={`auth__input scale-in-center`}
+    //               value={state.username}
+    //               onChange={(event) => {
+    //                 authInputsHandler(event.target.value, 'username');
+    //               }}
+    //               required
+    //               fullWidth
+    //               placeholder="Username"
+    //               type="text"
+    //               InputProps={{
+    //                 startAdornment: (
+    //                   <InputAdornment position="start">
+    //                     <MdOutlineAccountCircle className="icon" />
+    //                   </InputAdornment>
+    //                 ),
+    //               }}
+    //             />
+    //           )}
+    //           <TextField
+    //             className={`auth__input scale-in-center`}
+    //             value={state.password}
+    //             onChange={(event) => {
+    //               authInputsHandler(event.target.value, 'password');
+    //             }}
+    //             required
+    //             fullWidth
+    //             placeholder="Password"
+    //             type={state.passwordVisible ? 'text' : 'password'}
+    //             autoComplete="current-password"
+    //             InputProps={{
+    //               startAdornment: (
+    //                 <InputAdornment position="start">
+    //                   <MdLockOutline className="icon" />
+    //                 </InputAdornment>
+    //               ),
+    //               endAdornment: (
+    //                 <InputAdornment position="start">
+    //                   <IconButton
+    //                     className={`icon-container`}
+    //                     color="inherit"
+    //                     onClick={() => {
+    //                       setState({ passwordVisible: !state.passwordVisible });
+    //                     }}
+    //                   >
+    //                     {state.passwordVisible ? <RxEyeOpen className="icon" /> : <RxEyeClosed className="icon" />}
+    //                   </IconButton>
+    //                 </InputAdornment>
+    //               ),
+    //             }}
+    //           />
+    //           {state.isLogin ? null : (
+    //             <TextField
+    //               className={`auth__input scale-in-center`}
+    //               value={state.passwordRepeat}
+    //               onChange={(event) => {
+    //                 authInputsHandler(event.target.value, 'passwordRepeat');
+    //               }}
+    //               required
+    //               fullWidth
+    //               placeholder="Repeat Password"
+    //               type={state.passwordVisible ? 'text' : 'password'}
+    //               autoComplete="current-password"
+    //               InputProps={{
+    //                 startAdornment: (
+    //                   <InputAdornment position="start">
+    //                     <MdLockOutline className="icon" />
+    //                   </InputAdornment>
+    //                 ),
+    //                 endAdornment: (
+    //                   <InputAdornment position="start">
+    //                     <IconButton
+    //                       className={`icon-container`}
+    //                       color="inherit"
+    //                       onClick={() => {
+    //                         setState({ passwordVisible: !state.passwordVisible });
+    //                       }}
+    //                     >
+    //                       {state.passwordVisible ? <RxEyeOpen className="icon" /> : <RxEyeClosed className="icon" />}
+    //                     </IconButton>
+    //                   </InputAdornment>
+    //                 ),
+    //               }}
+    //             />
+    //           )}
+    //         </Box>
+    //         <Box className={`auth__buttons`}>
+    //           <Button onClick={togglePasswordResetMode} size="large" variant="outlined" className={`auth__button`}>
+    //             Reset Password
+    //           </Button>
+    //           <Button type="submit" size="large" variant="contained" className={`auth__button`}>
+    //             {state.isLogin ? 'Sign In' : 'Sign Up'}
+    //           </Button>
+    //         </Box>
+    //         <Typography className={`auth__toggle`} onClick={toggleAuthMode} variant="h6" component="h2">
+    //           {state.isLogin ? 'Create new account' : 'Use existing account'}
+    //         </Typography>
+    //       </form>
+    //     )}
+    //   </Card>
+    // </Modal>
   );
 };
 

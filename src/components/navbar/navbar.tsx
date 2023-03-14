@@ -1,12 +1,12 @@
 import './navbar.scss';
 
-import { AppBar, Box, IconButton, Toolbar, Typography, useMediaQuery } from '@mui/material';
 import React, { useReducer } from 'react';
 import { FaHome } from 'react-icons/fa';
 
 import NavbarMenu from '@/components/navbar/navbar_menu';
 import NavbarUserMenu from '@/components/navbar/navbar_user_menu';
 import { IAuthStore, useAuthStore } from '@/store/auth_store';
+import useWindowSize from '@/hooks/useWindowSize';
 
 interface INavbarState {
   blank: string;
@@ -14,30 +14,31 @@ interface INavbarState {
 
 const Navbar = (): JSX.Element => {
   const { authToken, darkMode, toggleDarkMode } = useAuthStore((state: IAuthStore) => state);
-  const mobile = useMediaQuery('(max-width:700px)');
+  const { width, height } = useWindowSize();
   const [state, setState] = useReducer(
     (state: INavbarState, action: Partial<INavbarState>) => ({ ...state, ...action }),
     { blank: '' },
   );
+  console.log(width, height);
   return (
     <>
-      <AppBar className={`navbar`} position="fixed">
-        <Toolbar className={`navbar__container`}>
-          <Box className={`navbar__main`}>
-            <Box className={`navbar__title`}>
-              <IconButton className={`icon-container`} size="large" color="inherit">
+      <nav className={`navbar`}>
+        <div className={`navbar__container`}>
+          <div className={`navbar__main`}>
+            <div className={`navbar__title`}>
+              <div className={`icon-container`}>
                 <FaHome className={`icon`} />
-              </IconButton>
-              {mobile ? null : <Typography variant="h5">App Name</Typography>}
-            </Box>
+              </div>
+              {/* {mobile ? null : <Typography variant="h5">App Name</Typography>} */}
+            </div>
             <NavbarMenu />
-            {mobile ? null : <Box className={`navbar-main-links`}>Links</Box>}
-          </Box>
-          <Box className={`navbar__util`}>
+            {/* {mobile ? null : <div className={`navbar-main-links`}>Links</div>} */}
+          </div>
+          <div className={`navbar__util`}>
             <NavbarUserMenu />
-          </Box>
-        </Toolbar>
-      </AppBar>
+          </div>
+        </div>
+      </nav>
     </>
   );
 };

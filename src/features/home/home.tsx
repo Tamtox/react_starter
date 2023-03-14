@@ -1,18 +1,5 @@
 import './home.scss';
 
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  FormControl,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from '@mui/material';
 import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useEffect, useReducer } from 'react';
@@ -21,6 +8,7 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import Loading from '@/components/loading/Spinner';
 import { IAuthStore, useAuthStore } from '@/store/auth_store';
 import { IEvent, IEventsStore, useEventsStore } from '@/store/events_store';
+import Button from '@/components/elements/button/Button';
 
 interface IFlatData {
   area: string;
@@ -101,32 +89,23 @@ const Home: React.FC = (): JSX.Element => {
     }
   }, [state.loadData]);
   return (
-    <Container maxWidth={false} className="home">
-      <Box className={`toolbar`}>
-        <TextField
-          placeholder="Url eg https://krisha.kz/a/show/49275461"
-          value={state.url}
-          size="small"
-          fullWidth
-          onChange={(event) => {
-            setState({ url: event.currentTarget.value });
-          }}
-        />
+    <section className="home">
+      <div className={`toolbar`}>
         <Button
-          variant="outlined"
+          size="large"
           onClick={() => {
-            setState({ loadData: true });
+            console.log(123);
           }}
         >
-          Search
+          123
         </Button>
-      </Box>
-      <Box className={`list`}>
+      </div>
+      <div className={`list`}>
         {Object.keys(state.flatData).map((key: string, index: number) => {
-          return <Card className="list-item" key={index}>{`${key} - ${state.flatData[key as keyof IFlatData]}`}</Card>;
+          return <div className="list-item" key={index}>{`${key} - ${state.flatData[key as keyof IFlatData]}`}</div>;
         })}
-      </Box>
-    </Container>
+      </div>
+    </section>
   );
 };
 

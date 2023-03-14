@@ -1,7 +1,7 @@
 import './Spinner.scss';
 import React from 'react';
 
-const Loading: React.FC<{ height: string }> = (props) => {
+const Spinner: React.FC<{ height: string }> = (props) => {
   return (
     <div style={{ height: props.height }} className="loading">
       <div className="lds-roller">
@@ -18,4 +18,4 @@ const Loading: React.FC<{ height: string }> = (props) => {
   );
 };
 
-export default Loading;
+export default Spinner;

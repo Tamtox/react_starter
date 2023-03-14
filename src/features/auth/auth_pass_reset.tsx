@@ -1,4 +1,3 @@
-import { Box, Button, InputAdornment, TextField } from '@mui/material';
 import { MdOutlineEmail } from 'react-icons/md';
 
 interface AuthPassResetProps {
@@ -15,7 +14,8 @@ const AuthPassReset = ({ passwordResetEmail, authInputsHandler, togglePasswordRe
   };
   return (
     <form className={`auth__pass-reset auth__form`} onSubmit={passwordResetHandler}>
-      <Box className={`auth__inputs`}>
+      <div>Pass Reset</div>
+      {/* <Box className={`auth__inputs`}>
         <TextField
           className={`auth__input scale-in-center`}
           value={passwordResetEmail}
@@ -43,7 +43,7 @@ const AuthPassReset = ({ passwordResetEmail, authInputsHandler, togglePasswordRe
         <Button type="submit" size="large" variant="contained" className={`auth__button`}>
           Reset Password
         </Button>
-      </Box>
+      </Box> */}
     </form>
   );
 };
