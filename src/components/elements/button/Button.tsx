@@ -10,9 +10,9 @@ const variants = {
 };
 
 const sizes = {
-  small: 'py-2 px-4 text-sm',
-  medium: 'py-2 px-6 text-md',
-  large: 'py-3 px-8 text-lg',
+  small: 'py-2 px-10 text-sm',
+  medium: 'py-2 px-10 text-md',
+  large: 'py-4 px-20 text-lg',
 };
 
 type IconProps =
@@ -32,7 +32,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       type = 'button',
       className = '',
       variant = 'primary',
-      size = 'md',
+      size = 'medium',
       isLoading = false,
       startIcon,
       endIcon,
@@ -45,7 +45,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type={type}
         className={clsx(
-          'flex justify-center items-center border border-gray-300 disabled:opacity-70 disabled:cursor-not-allowed rounded-md shadow-sm font-medium focus:outline-none hover:opacity-80',
+          'flex justify-center items-center border border-gray-300 ',
+          'disabled:opacity-70 disabled:cursor-not-allowed rounded-md shadow-sm font-medium focus:outline-none hover:opacity-80',
           variants[variant],
           sizes[size],
           className,

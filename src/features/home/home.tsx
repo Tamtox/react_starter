@@ -92,7 +92,7 @@ const Home: React.FC = (): JSX.Element => {
     <section className="home">
       <div className={`toolbar`}>
         <Button
-          size="large"
+          // size="large"
           onClick={() => {
             console.log(123);
           }}

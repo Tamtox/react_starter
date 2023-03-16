@@ -12,9 +12,22 @@ import Navbar from '@/components/navbar/navbar';
 
 function App() {
   const { authToken, darkMode } = useAuthStore((state: IAuthStore) => state);
+  const theme = useMemo(
+    () => ({
+      bg: darkMode ? '#000000' : '#FAF9F6',
+      bgSurface: darkMode ? '' : '',
+      colorTextPrimary: darkMode ? '' : '',
+      colorTextSecondary: darkMode ? '' : '',
+      colorPrimary: darkMode ? '' : '',
+      colorSecondary: darkMode ? '' : '',
+      colorInfo: darkMode ? '' : '',
+      colorDanger: darkMode ? '' : '',
+    }),
+    [darkMode],
+  );
   // const myTheme = useMemo(() => {}, [darkMode]);
   return (
-    <main className="app">
+    <main className="app" style={{ background: theme.bg }}>
       <Navbar />
       <div className="wrapper">
         <Suspense fallback={<Loading height="100vh" />}>
