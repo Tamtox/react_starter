@@ -15,30 +15,34 @@ function App() {
   const theme = useMemo(
     () => ({
       bg: darkMode ? '#000000' : '#FAF9F6',
-      bgSurface: darkMode ? '' : '',
+      bgSurface: darkMode ? '#100F0F' : '#ffffff',
       colorTextPrimary: darkMode ? '' : '',
       colorTextSecondary: darkMode ? '' : '',
       colorPrimary: darkMode ? '' : '',
       colorSecondary: darkMode ? '' : '',
       colorInfo: darkMode ? '' : '',
+      colorSuccess: darkMode ? '' : '',
       colorDanger: darkMode ? '' : '',
     }),
     [darkMode],
   );
-  // const myTheme = useMemo(() => {}, [darkMode]);
+  type ThemeContextType = typeof theme;
+  const ThemeContext = createContext<ThemeContextType>(theme);
   return (
-    <main className="app" style={{ background: theme.bg }}>
-      <Navbar />
-      <div className="wrapper">
-        <Suspense fallback={<Loading height="100vh" />}>
-          <Routes>
-            {/* <Route path="/" element={<Home />} /> */}
-            {/* <Route path='/auth' element={isLoggedIn ? (verificationStatus === "Complete" ? <Home/> : <Profile/>) : <Auth/>} /> */}
-            <Route path="*" element={<Home />} />
-          </Routes>
-        </Suspense>
-      </div>
-    </main>
+    <ThemeContext.Provider value={theme}>
+      <main className="app" style={{ background: theme.bg }}>
+        <Navbar />
+        <div className="wrapper">
+          <Suspense fallback={<Loading height="100vh" />}>
+            <Routes>
+              {/* <Route path="/" element={<Home />} /> */}
+              {/* <Route path='/auth' element={isLoggedIn ? (verificationStatus === "Complete" ? <Home/> : <Profile/>) : <Auth/>} /> */}
+              <Route path="*" element={<Home />} />
+            </Routes>
+          </Suspense>
+        </div>
+      </main>
+    </ThemeContext.Provider>
   );
 }
 
