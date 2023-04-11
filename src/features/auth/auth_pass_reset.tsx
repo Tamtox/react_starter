@@ -1,3 +1,5 @@
+import styles from './auth.module.scss';
+
 import { Box, Button, InputAdornment, TextField } from '@mui/material';
 import { MdOutlineEmail } from 'react-icons/md';
 
@@ -14,10 +16,10 @@ const AuthPassReset = ({ passwordResetEmail, authInputsHandler, togglePasswordRe
     togglePasswordResetMode();
   };
   return (
-    <form className={`auth__pass-reset auth__form`} onSubmit={passwordResetHandler}>
-      <Box className={`auth__inputs`}>
+    <form className={`${styles.auth__passreset} ${styles.auth__form}`} onSubmit={passwordResetHandler}>
+      <Box className={`${styles.auth__inputs}`}>
         <TextField
-          className={`auth__input scale-in-center`}
+          className={`${styles.auth__input} scale-in-center`}
           value={passwordResetEmail}
           onChange={(event) => {
             authInputsHandler(event.target.value, 'passwordResetEmail');
@@ -36,11 +38,11 @@ const AuthPassReset = ({ passwordResetEmail, authInputsHandler, togglePasswordRe
           }}
         />
       </Box>
-      <Box className={`auth__buttons`}>
-        <Button onClick={togglePasswordResetMode} size="large" variant="outlined" className={`auth__button`}>
+      <Box className={`${styles.auth__buttons}`}>
+        <Button onClick={togglePasswordResetMode} size="large" variant="outlined" className={`${styles.auth__button}`}>
           Back
         </Button>
-        <Button type="submit" size="large" variant="contained" className={`auth__button`}>
+        <Button type="submit" size="large" variant="contained" className={`${styles.auth__button}`}>
           Reset Password
         </Button>
       </Box>

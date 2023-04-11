@@ -1,12 +1,12 @@
 module.exports = {
   root: true,
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: 2021,
-    sourceType: 'module',
+    sourceType: "module",
     ecmaFeatures: {
-      jsx: true,
-    },
+      jsx: true
+    }
   },
   settings: {
     react: {
@@ -14,7 +14,7 @@ module.exports = {
     },
     'import/resolver': {
       node: {
-        paths: ['src'],
+        // paths: ['src'],
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
@@ -27,30 +27,23 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
+    'plugin:import/recommended',
     'plugin:jsx-a11y/recommended',
-    'plugin:prettier/recommended',
-    'plugin:testing-library/react',
-    'plugin:jest-dom/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'eslint-config-prettier',
+    'prettier'
   ],
-  plugins: ['simple-import-sort', 'prettier'],
+  plugins: ["@typescript-eslint", "react", "jsx-a11y", "simple-import-sort"],
   rules: {
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }],
+    "import/no-unresolved": 'off',
+    "@typescript-eslint/no-unused-vars": "warn",
+    "@typescript-eslint/no-explicit-any": "error",
     'react/react-in-jsx-scope': 'off',
     'jsx-a11y/accessible-emoji': 'off',
     'react/prop-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
-    'jsx-a11y/anchor-is-valid': [
-      'error',
-      {
-        components: ['Link'],
-        specialLink: ['hrefLeft', 'hrefRight'],
-        aspects: ['invalidHref', 'preferButton'],
-      },
-    ],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
   },
 };

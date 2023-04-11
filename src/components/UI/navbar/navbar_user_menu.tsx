@@ -1,14 +1,13 @@
-import './navbar_user_menu.scss';
-
 import { Box, Button, Card, IconButton, Typography } from '@mui/material';
 import React, { useReducer, useRef } from 'react';
 import { FaRegMoon, FaRegSun, FaRegUserCircle, FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 import { MdOutlineAccountCircle } from 'react-icons/md';
 
+import Auth from '@/features/auth/auth';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 import { IAuthStore, useAuthStore } from '@/store/auth_store';
 
-import Auth from '@/features/auth/auth';
+import styles from './navbar_user_menu.module.scss';
 
 interface INavbarUserMenuState {
   navbarUserMenuOpen: boolean;
@@ -23,7 +22,7 @@ const NavbarUserMenu = () => {
     {
       navbarUserMenuOpen: false,
       authMenuOpen: false,
-    },
+    }
   );
   const toggleNavbarUserMenu = () => {
     setState({
@@ -43,26 +42,26 @@ const NavbarUserMenu = () => {
   };
   useOnClickOutside(navbarUserMenuRef, closeNavbarUserMenu);
   return (
-    <Box className={`navbar__user`} ref={navbarUserMenuRef}>
+    <Box className={`${styles.navbar__user}`} ref={navbarUserMenuRef}>
       <IconButton className={`icon-container`} size="large" color="inherit" onClick={toggleNavbarUserMenu}>
         <MdOutlineAccountCircle className={`icon`} />
       </IconButton>
       <Auth open={state.authMenuOpen} handleClose={authMenuHandler} />
       {state.navbarUserMenuOpen ? (
-        <Card className={`navbar__user__menu fade-in-top`}>
-          <Button className={`user__menu__header user__menu__element`}>
+        <Card className={`${styles.navbar__user__menu} fade-in-top`}>
+          <Button className={`${styles.user__menu__header} ${styles.user__menu__element}`}>
             <FaRegUserCircle className={`icon`} />
             <Typography>{`${authToken ? 'Hello username' : 'Welcome, Guest'}`}</Typography>
           </Button>
-          <Button className={`user__menu__dark-mode user__menu__element`} onClick={toggleDarkMode}>
+          <Button className={`${styles.user__menu__dark__mode} ${styles.user__menu__element}`} onClick={toggleDarkMode}>
             {darkMode ? <FaRegMoon className={`dark-mode-sun icon`} /> : <FaRegSun className={`dark-mode-moon icon`} />}
             <Typography variant="body1">{darkMode ? 'Dark Mode' : 'Light Mode'}</Typography>
           </Button>
-          <Button className={`user__menu__auth user__menu__element`} onClick={authMenuHandler}>
+          <Button className={`${styles.user__menu__auth} ${styles.user__menu__element}`} onClick={authMenuHandler}>
             {authToken ? (
-              <FaSignOutAlt className={`auth-button__icon icon`} />
+              <FaSignOutAlt className={`${styles.auth__button__icon} icon`} />
             ) : (
-              <FaSignInAlt className={`auth-button__icon icon`} />
+              <FaSignInAlt className={`${styles.auth__button__icon} icon`} />
             )}
             <Typography variant="body1">{authToken ? 'Sign Out' : 'Sign In/Sign Up'}</Typography>
           </Button>

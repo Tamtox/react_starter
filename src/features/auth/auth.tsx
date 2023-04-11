@@ -1,4 +1,4 @@
-import './auth.scss';
+import styles from './auth.module.scss';
 
 import { Box, Button, Card, IconButton, InputAdornment, Modal, TextField, Typography } from '@mui/material';
 import axios from 'axios';
@@ -68,14 +68,14 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
   };
   return (
     <Modal
-      className={`auth__modal`}
+      className={`${styles.auth__modal}`}
       open={open}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Card className={`auth`}>
-        <Box className={`auth__header`}>
+      <Card className={`${styles.auth}`}>
+        <Box className={`${styles.auth__header}`}>
           <Typography variant="h5" component="h2">
             {state.label}
           </Typography>
@@ -87,10 +87,10 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
             togglePasswordResetMode={togglePasswordResetMode}
           />
         ) : (
-          <form className={`auth__sign-in auth__form`} onSubmit={authFormSubmitHandler}>
-            <Box className={`auth__inputs`}>
+          <form className={`${styles.auth__signin} ${styles.auth__form}`} onSubmit={authFormSubmitHandler}>
+            <Box className={`${styles.auth__inputs}`}>
               <TextField
-                className={`auth__input scale-in-center`}
+                className={`${styles.auth__input} scale-in-center`}
                 value={state.email}
                 onChange={(event) => {
                   authInputsHandler(event.target.value, 'email');
@@ -110,7 +110,7 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
               />
               {state.isLogin ? null : (
                 <TextField
-                  className={`auth__input scale-in-center`}
+                  className={`${styles.auth__input} scale-in-center`}
                   value={state.username}
                   onChange={(event) => {
                     authInputsHandler(event.target.value, 'username');
@@ -129,7 +129,7 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
                 />
               )}
               <TextField
-                className={`auth__input scale-in-center`}
+                className={`${styles.auth__input} scale-in-center`}
                 value={state.password}
                 onChange={(event) => {
                   authInputsHandler(event.target.value, 'password');
@@ -162,7 +162,7 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
               />
               {state.isLogin ? null : (
                 <TextField
-                  className={`auth__input scale-in-center`}
+                  className={`${styles.auth__input} scale-in-center`}
                   value={state.passwordRepeat}
                   onChange={(event) => {
                     authInputsHandler(event.target.value, 'passwordRepeat');
@@ -195,15 +195,20 @@ const Auth = ({ open, handleClose }: Props): JSX.Element => {
                 />
               )}
             </Box>
-            <Box className={`auth__buttons`}>
-              <Button onClick={togglePasswordResetMode} size="large" variant="outlined" className={`auth__button`}>
+            <Box className={`${styles.auth__buttons}`}>
+              <Button
+                onClick={togglePasswordResetMode}
+                size="large"
+                variant="outlined"
+                className={`${styles.auth__button}`}
+              >
                 Reset Password
               </Button>
-              <Button type="submit" size="large" variant="contained" className={`auth__button`}>
+              <Button type="submit" size="large" variant="contained" className={`${styles.auth__button}`}>
                 {state.isLogin ? 'Sign In' : 'Sign Up'}
               </Button>
             </Box>
-            <Typography className={`auth__toggle`} onClick={toggleAuthMode} variant="h6" component="h2">
+            <Typography className={`${styles.auth__toggle}`} onClick={toggleAuthMode} variant="h6" component="h2">
               {state.isLogin ? 'Create new account' : 'Use existing account'}
             </Typography>
           </form>
